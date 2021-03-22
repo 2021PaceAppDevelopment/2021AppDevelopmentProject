@@ -1,6 +1,6 @@
 # 2021AppDevelopmentProject
 <br>
-<h1>APPLICATION PROPOSAL: NYFTATix (NEW YORK FAKE TRANSIT ASSOCIATION TICKET)</h1>
+<h1>APPLICATION PROPOSAL: <h3>NYFTATix (NEW YORK FAKE TRANSIT ASSOCIATION TICKET)</h3></h1>
 <p>
 
 <br>
@@ -10,7 +10,7 @@ Are app will be designed to allow any indivivual to buy and use a bus or subway 
 
 Persona 1:
 <br>
-Details:
+Details:<br>
    Marie is a young high school student who usually buys her metro card form the school and usually asks for the exact amount to get her home. However Marie was not paying attention one day and missed her stop. This normally would not be a problem but the spacing for this stop was unusally large since it passed a cemetarty. Relizing her mistake Marie got off on the next stop but had no way to catch another bus as her metro card was empty even though she had a credit card and cash.
 Goals:
 <br>
@@ -25,9 +25,9 @@ Details:
 Goals:
 <br>
  With this application Linda will no longer need to worry about remebering her metro card as she will now have it on her phone. Now Linda will never miss her bus again or be late to work because of her metro card.
- 
+
 <br>
-Features:
+Features: <br>
  1. Log in/create new account <br>
  2. User will have a profile where card information is stored <br>
  3. Able to purchase and store Tickets (One use/Weekly/Month)<br>
