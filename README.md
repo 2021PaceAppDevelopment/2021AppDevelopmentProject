@@ -6,15 +6,17 @@
 <br>
 Are app will be designed to allow any indivivual to buy and use a bus or subway fare from thier phone! Strangly enough there is no app implemented for that for New York city, there is one for jersey. This application will make buying a metro card obsolit or help in a pinch. We have already checkd on several applications that already do something similar such as the Metro North Tix application and the New Jersey Ticket applciation.
 
-
+<br>
 
 Persona 1:
 <br>
 Details:<br>
    Marie is a young high school student who usually buys her metro card form the school and usually asks for the exact amount to get her home. However Marie was not paying attention one day and missed her stop. This normally would not be a problem but the spacing for this stop was unusally large since it passed a cemetarty. Relizing her mistake Marie got off on the next stop but had no way to catch another bus as her metro card was empty even though she had a credit card and cash.
+   <br>
 Goals:
 <br>
     Marie would have appreciated it if there had been an app like NyFTATix so that she could purchase a ticket from her phone and not have to worry about walking back through the cemetary.
+<br>
 
 Persona 2:
 <br>
@@ -32,6 +34,9 @@ Features: <br>
  2. User will have a profile where card information is stored <br>
  3. Able to purchase and store Tickets (One use/Weekly/Month)<br>
  4. Map Tracking of bus schedule <br>
+ 
+Market Comparison: <br>
+  This application is not completley unique as there a few that function similaraly to it, but what makes it unique is that there is no application set up for the NY public transit system at this time. The applications we are basing this on are the MTAeTix and the NJ TRANSIT Mobile App
 
 <br>
 Technologies: <br>
