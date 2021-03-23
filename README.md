@@ -1,6 +1,6 @@
 # 2021AppDevelopmentProject
 <br>
-<h1>APPLICATION PROPOSAL: <h3>NYFTATix (NEW YORK FAKE TRANSIT ASSOCIATION TICKET)</h3></h1>
+<h2>APPLICATION PROPOSAL: <h3>NYFTATix (NEW YORK FAKE TRANSIT ASSOCIATION TICKET)</h3></h2>
 <p>
 
 <br>
@@ -34,6 +34,7 @@ Features: <br>
  2. User will have a profile where card information is stored <br>
  3. Able to purchase and store Tickets (One use/Weekly/Month)<br>
  4. Map Tracking of bus schedule <br>
+ <br>
  
 Market Comparison: <br>
   This application is not completley unique as there a few that function similaraly to it, but what makes it unique is that there is no application set up for the NY public transit system at this time. The applications we are basing this on are the MTAeTix and the NJ TRANSIT Mobile App
