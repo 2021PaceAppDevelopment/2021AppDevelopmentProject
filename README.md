@@ -39,11 +39,20 @@ Features: <br>
 Market Comparison: <br>
   This application is not completley unique as there a few that function similaraly to it, but what makes it unique is that there is no application set up for the NY public transit system at this time. The applications we are basing this on are the MTAeTix and the NJ TRANSIT Mobile App. The MTAeTix application is a ticket app for the Metro North, which allows a user to purchase a ticket (Signle ride, Weekly, Monthly). Once the pass is activated a new QR code and band of color with date and time apper at the top of the tickit for everyday which allows the ticket master to view and approve. For NJ TRANSIT Mobile application This application is used for all public transit in the area allwoing for ticket purchases and a few of routes and times.
 <br>
-  Images NJ Transit Mobile App: <br>
+<br>
+  <h4>Images NJ Transit Mobile App:</h4> <br>
   <br>
   <img src = "Images/NJTransit1.jpg" width ="250">
   <img src = "Images/NJTransit2.jpg" width ="250">
   <img src = "Images/NJTransit3.jpg" width ="250">
+  <br>
+  <br>
+  <h4>Images NY MTAeTix App:</h4> <br>
+  <br>
+  <img src = "Images/NYMetroEx1.jpg" width ="250">
+  <img src = "Images/NYMetroEx2.jpg" width ="250">
+  
+
 
 
 <br>
