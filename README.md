@@ -34,10 +34,12 @@ Features: <br>
  2. User will have a profile where card information is stored <br>
  3. Able to purchase and store Tickets (One use/Weekly/Month)<br>
  4. Map Tracking of bus schedule <br>
+ 5. Color and Bar code that changes daily <br>
+ 6. Bus and Train Routes <br>
  <br>
  
 Market Comparison: <br>
-  This application is not completley unique as there a few that function similaraly to it, but what makes it unique is that there is no application set up for the NY public transit system at this time. The applications we are basing this on are the MTAeTix and the NJ TRANSIT Mobile App. The MTAeTix application is a ticket app for the Metro North, which allows a user to purchase a ticket (Signle ride, Weekly, Monthly). Once the pass is activated a new QR code and band of color with date and time apper at the top of the tickit for everyday which allows the ticket master to view and approve. For NJ TRANSIT Mobile application This application is used for all public transit in the area allwoing for ticket purchases and a few of routes and times.
+  This application is not completley unique as there a few that function similaraly to it, but what makes it unique is that there is no application set up for the NY public transit system at this time. The applications we are basing this on are the MTAeTix and the NJ TRANSIT Mobile App. The MTAeTix application is a ticket app for the Metro North, which allows a user to purchase a ticket (Signle ride, Weekly, Monthly). Once the pass is activated a new QR code and band of color with date and time apper at the top of the tickit for everyday which allows the ticket master to view and approve. For NJ TRANSIT Mobile application This application is used for all public transit in the area allwoing for ticket purchases and a few of routes and times. We would like to implement these features as well into our application in order to not only have it replace the everyday commuters need for a metro card but also help those who may only needed once in a while
 <br>
 <br>
   <h4>Images NJ Transit Mobile App:</h4> <br>
@@ -51,7 +53,7 @@ Market Comparison: <br>
   <br>
   <img src = "Images/NYMetroEx1.jpg" width ="250">
   <img src = "Images/NYMetroEx2.jpg" width ="250">
-  
+
 
 
 
