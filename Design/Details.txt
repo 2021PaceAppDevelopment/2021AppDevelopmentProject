@@ -1,0 +1,17 @@
+Number of Pages:
+1. Opening page (Log in and Sign up)
+2. Sign up page
+3. Log in page( may be pop up or end up in Opening page)
+4. Profile(name, email, credit card info)
+5. Ticket Purchase(Daily, Monthly, or Weekly) non-commitied item (Specility tickets, i.e. elderly, express buses, ect.)
+6. Bus routes/Maps
+
+
+Color Scheme:
+Mta Blue, white, and Pale Azura
+
+Text White:
+Background Pale Azura
+
+Speciflty areas:
+Mta Blue
