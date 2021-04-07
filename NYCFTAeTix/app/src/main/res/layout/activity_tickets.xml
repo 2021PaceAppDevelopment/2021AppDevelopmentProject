@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFFFF"
+    tools:context=".Tickets">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/maps_tickets_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_chip">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/map_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onMap"
+            android:text="@string/maps_button"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="#D3CFCF" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tickets_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onTickets"
+            android:text="@string/tickets_button"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="#D3CFCF" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/profile_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#FBFFFF"
+        android:onClick="onProfile"
+        android:text="@string/profile_button"
+        app:chipBackgroundColor="#D3CFCF"
+        app:chipSurfaceColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/maps_tickets_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fta_logo" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/ticket_option_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/buy_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/purchase_tickets_tv">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/one_way_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/one_way_chip" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/weekly_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/weekly_chip" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/monthly_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/monthly_chip" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/purchase_tickets_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="39dp"
+        android:text="@string/purchase_tickets_tv"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/ticket_option_chip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/active_button" />
+
+    <Button
+        android:id="@+id/buy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_option_chip" />
+
+    <TextView
+        android:id="@+id/wallet_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@drawable/baseline_arrow_drop_down_18"
+        android:onClick="onWallet"
+        android:text="Wallet"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maps_tickets_button" />
+
+    <TextView
+        android:id="@+id/one_way_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/one_way_chip"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/activate_button"
+        app:layout_constraintEnd_toStartOf="@+id/activate_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/weekly_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/weekly_chip"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/purchase_tickets_tv"
+        app:layout_constraintStart_toStartOf="@+id/one_way_textView"
+        app:layout_constraintTop_toBottomOf="@+id/one_way_textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/active_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="ACTIVE"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/weekly_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/activate_button" />
+
+    <Button
+        android:id="@+id/activate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="ACTIVATE"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/one_way_textView"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_textView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

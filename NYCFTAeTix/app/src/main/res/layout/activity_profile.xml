@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFFFF"
+    tools:context=".Profile">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cc_expiration_textField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/credit_card_expiration_date_hint"
+        app:hintTextColor="#A19D9D"
+        app:layout_constraintBaseline_toBaselineOf="@+id/name_on_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/name_on_card">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cc_expire_editText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:textColorHint="#A19D9D"
+            tools:layout_editor_absoluteX="-2dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_on_card"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_on_card"
+        android:textColorHint="#A19D9D"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@+id/add_credit_card_button"
+        app:layout_constraintEnd_toStartOf="@+id/cvv_textField"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credit_card_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="209dp"
+            android:layout_height="49dp"
+            android:textColor="@color/black"
+            android:textColorHint="?android:attr/textColorPrimaryInverseNoDisable"
+            app:textInputLayoutFocusedRectEnabled="true"
+            tools:layout_editor_absoluteX="-2dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/credit_card_number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/credit_card_16_digit_number"
+        android:textColorHint="#A19D9D"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@+id/name_on_card"
+        app:layout_constraintEnd_toStartOf="@+id/cvv_textField"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_payment">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/credit_card_number_editText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="209dp"
+            android:layout_height="49dp"
+            android:textColor="@color/black"
+            android:textColorHint="?android:attr/textColorPrimaryInverseNoDisable"
+            app:textInputLayoutFocusedRectEnabled="true"
+            tools:layout_editor_absoluteX="-2dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cvv_textField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/credit_card_cvv"
+        android:textColorHint="#A19D9D"
+        app:counterEnabled="true"
+        app:counterMaxLength="3"
+        app:endIconMode="clear_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/credit_card_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/credit_card_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="-2dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="57dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        app:backgroundTint="#D1CFCF"
+        app:icon="@drawable/baseline_edit_black_20"
+        app:iconTint="#1C1919"
+        app:layout_constraintBaseline_toBaselineOf="@+id/delete_button"
+        app:layout_constraintStart_toEndOf="@+id/credit_card_info" />
+
+
+    <TextView
+        android:id="@+id/email_TV2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/email_password"
+        android:textColor="#130F0F"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/email_TV"
+        app:layout_constraintTop_toBottomOf="@+id/email_TV" />
+
+    <TextView
+        android:id="@+id/add_payment"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#004FB1"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_method"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/add_credit_card_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/add_button"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_on_card" />
+
+    <Button
+        android:id="@+id/log_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="@string/log_out_button"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_button" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fta_logo" />
+
+    <TextView
+        android:id="@+id/email_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginRight="132dp"
+        android:text="@string/email"
+        android:textColor="#070707"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/maps_tickets_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onMap"
+            android:text="@string/maps_button"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="@android:color/darker_gray" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tickets_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onTickets"
+            android:text="@string/tickets_button"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="@android:color/darker_gray" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#FBFFFF"
+        android:onClick="onProfile"
+        android:text="@string/profile_button"
+        app:chipBackgroundColor="#D3CFCF"
+        app:chipSurfaceColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toStartOf="@+id/maps_tickets_button"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/card_info_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/card_on_file"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/credit_card_info"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/credit_card_info"
+        android:layout_width="186dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:hint="@string/credit_card_number"
+        android:textColorHint="@android:color/secondary_text_light_nodisable"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit_button"
+        app:layout_constraintEnd_toStartOf="@+id/edit_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="57dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="83dp"
+        app:backgroundTint="#D1CFCF"
+        app:icon="@drawable/baseline_delete_20"
+        app:iconTint="#1C1919"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_button" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="115dp"
+        android:layout_marginRight="115dp"
+        android:text="@string/Password"
+        app:layout_constraintBaseline_toBaselineOf="@+id/email_TV2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginBottom="33dp"
+        android:text="@string/email_hint"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
