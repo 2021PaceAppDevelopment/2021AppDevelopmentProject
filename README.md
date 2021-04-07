@@ -67,5 +67,10 @@ Technologies: <br>
  Google MAPs API <br>
  Firebase <br>
 
+<br>
+#Current Status of Project
+<br>
+So far, we have created a prototype of our application. We currently have a draft of our application up. This draft includes the layouts and activities of a ticket page, a map page, and a profile page. We have included the Google Maps API to the application. 
+<br>
 
 </p>
