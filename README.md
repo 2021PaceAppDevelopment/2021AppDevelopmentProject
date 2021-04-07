@@ -68,8 +68,9 @@ Technologies: <br>
  Firebase <br>
 
 <br>
-<h1>Current Status of Project</h1>
+<h3>Current Status of Project</h3>
 <br>
+April 7, 2021:
 So far, we have created a prototype of our application. We currently have a draft of our application up. This draft includes the layouts and activities of a ticket page, a map page, and a profile page. We have included the Google Maps API to the application. 
 <br>
 
