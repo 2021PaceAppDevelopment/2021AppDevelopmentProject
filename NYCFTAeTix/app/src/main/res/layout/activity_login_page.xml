@@ -8,7 +8,7 @@
     tools:context=".LoginPage">
 
     <EditText
-        android:id="@+id/SignUpEmail"
+        android:id="@+id/signUpEmail"
         android:layout_width="282dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
@@ -21,10 +21,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email_Text" />
+        app:layout_constraintTop_toBottomOf="@+id/email_Text" />
 
     <TextView
-        android:id="@+id/SignUpPage"
+        android:id="@+id/signUpPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/PasswordText"
+        android:id="@+id/passwordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -47,25 +47,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpEmail" />
 
     <EditText
-        android:id="@+id/PasswordLogin"
+        android:id="@+id/passwordLogin"
         android:layout_width="282dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
         android:background="#FFFFFF"
         android:ems="10"
         android:hint="@string/LoginPassword"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:outlineAmbientShadowColor="#000000"
         android:outlineSpotShadowColor="#040202"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 
     <TextView
-        android:id="@+id/Email_Text"
+        android:id="@+id/email_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
@@ -74,10 +74,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.171"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpPage" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpPage" />
 
     <ImageView
-        android:id="@+id/LeftLogo"
+        android:id="@+id/leftLogo"
         android:layout_width="53dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -88,7 +88,7 @@
         app:srcCompat="@drawable/fta_logo" />
 
     <Button
-        android:id="@+id/LoginSubmit"
+        android:id="@+id/loginSubmit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -96,8 +96,8 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="96dp"
-        android:onClick="SubmitLogin"
-        android:text="SUBMIT"
+        android:onClick="submitLogin"
+        android:text="@string/submit_button_logIn"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:backgroundTint="#0039A6"
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

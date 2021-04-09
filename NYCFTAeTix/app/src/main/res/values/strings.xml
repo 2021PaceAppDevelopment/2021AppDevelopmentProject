@@ -34,4 +34,5 @@
     <string name="email_Login_Title">EMAIL:</string>
     <string name="LoginPassword">ENTER PASSWORD</string>
     <string name="LoginEmail">ENTER EMAIL</string>
+    <string name="submit_button_logIn">SUBMIT</string>
 </resources>
