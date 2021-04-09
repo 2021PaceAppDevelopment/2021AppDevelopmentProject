@@ -25,4 +25,13 @@
     <string name="destination_hint">i.e. Central Park</string>
     <string name="find_best_transit_routes">Find Best Transit Routes</string>
     <string name="app_logo">App logo</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="log_in">LOGIN</string>
+    <string name="introduction">Purchase your metro card here</string>
+    <string name="Title">NyFTAeTIX</string>
+    <string name="login_LoginScreenTitle">LOGIN</string>
+    <string name="password_login_Title">PASSWORD:</string>
+    <string name="email_Login_Title">EMAIL:</string>
+    <string name="LoginPassword">ENTER PASSWORD</string>
+    <string name="LoginEmail">ENTER EMAIL</string>
 </resources>
