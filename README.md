@@ -74,4 +74,8 @@ April 7, 2021:
 So far, we have created a prototype of our application. We currently have a draft of our application up. This draft includes the layouts and activities of a ticket page, a map page, and a profile page. We have included the Google Maps API to the application. 
 <br>
 
+<br>
+April 9, 2021:
+We added firebase database to our project. We also are currently able to find a user's location using Google maps API. 
+
 </p>
