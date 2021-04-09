@@ -19,7 +19,7 @@
         android:theme="@style/Theme.NYCFTAeTix">
         <activity android:name=".TicketPurchase" />
         <activity android:name=".SignUpPage" />
-        <activity android:name=".MainPage" />
+        <activity android:name=".LoginPage" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -31,7 +31,7 @@
         <activity android:name=".Map" />
         <activity android:name=".Tickets" />
         <activity android:name=".Profile"/>
-        <activity android:name=".LoginPage">
+        <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
