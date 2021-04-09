@@ -53,7 +53,26 @@ public class LoginPage extends AppCompatActivity {
         });
         //retrieving an instance of database, and referencing the location it should write to
         database = FirebaseDatabase.getInstance();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         info = database.getReference().child("users");
+        info.keepSynced(true);
+
+        info.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    SignIn users = ds.getValue(SignIn.class);
+                    Log.i(TAG, counter + " Email: " + users.getEmail() + " password: " + users.getPassword());
+                    counter++;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Getting username and email failed", error.toException());
+
+            }
+        });
 
     }
 
@@ -64,8 +83,7 @@ public class LoginPage extends AppCompatActivity {
 
         SignIn u = new SignIn(em, pwd);
         info.child(increment).setValue(u);
-        counter++;
-
+        
 
         //clearing text after button has been clicked
         mEmail.getText().clear();
@@ -79,21 +97,4 @@ public class LoginPage extends AppCompatActivity {
         startActivity(profileIntent);
     }
 
-    private void eventListener(DatabaseReference postReference){
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                SignIn users = snapshot.getValue(SignIn.class);
-                Log.i(TAG, counter + " Email: " + users.getEmail() + " password: " + users.getPassword());
-                counter = 0;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Getting username and email failed", error.toException());
-            }
-        };
-        postReference.addValueEventListener(valueEventListener);
-
-    }
 }
