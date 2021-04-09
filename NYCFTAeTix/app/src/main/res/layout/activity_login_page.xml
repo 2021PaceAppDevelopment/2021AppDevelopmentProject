@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBFFFF"
     tools:context=".LoginPage">
 
     <EditText
@@ -95,6 +96,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="96dp"
+        android:onClick="SubmitLogin"
         android:text="SUBMIT"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -103,9 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordLogin"
-        android:onClick="SubmitLogin"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/PasswordLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
