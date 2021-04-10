@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +27,6 @@ public class LoginPage extends AppCompatActivity {
     private long counter;
     private Button submitButton;
 
-
     private DatabaseReference info;
     private FirebaseDatabase database;
     private static final String TAG = "LoginPage";
@@ -40,6 +40,7 @@ public class LoginPage extends AppCompatActivity {
         mEmail = findViewById(R.id.signUpEmail);
         mPassword = findViewById(R.id.passwordLogin);
 
+
         //checking to see if editText fields are empty. If they are, don't log in person, otherwise login
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,16 +53,17 @@ public class LoginPage extends AppCompatActivity {
             }
         });
         //retrieving an instance of database, and referencing the location it should write to
-        database = FirebaseDatabase.getInstance();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        database = FirebaseDatabase.getInstance();
         info = database.getReference().child("users");
         info.keepSynced(true);
 
         info.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                counter = 0;
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    SignIn users = ds.getValue(SignIn.class);
+                    SignIn users = (SignIn) ds.getValue(SignIn.class);
                     Log.i(TAG, counter + " Email: " + users.getEmail() + " password: " + users.getPassword());
                     counter++;
                 }
@@ -74,6 +76,7 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+
     }
 
     public void submitLogin(View view) {
@@ -83,17 +86,13 @@ public class LoginPage extends AppCompatActivity {
 
         SignIn u = new SignIn(em, pwd);
         info.child(increment).setValue(u);
-        
 
         //clearing text after button has been clicked
         mEmail.getText().clear();
         mPassword.getText().clear();
-        //Hiding the keyboard after the button has been clicked
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if(inputManager != null){
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-        Intent profileIntent = new Intent(this, Profile.class);
+
+        //Once logged in goes to ticket page
+        Intent profileIntent = new Intent(this, Tickets.class);
         startActivity(profileIntent);
     }
 

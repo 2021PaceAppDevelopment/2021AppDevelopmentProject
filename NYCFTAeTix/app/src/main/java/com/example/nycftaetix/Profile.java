@@ -27,4 +27,9 @@ public class Profile extends AppCompatActivity {
         Intent profileIntent = new Intent(this, Profile.class);
         startActivity(profileIntent);
     }
+
+    public void logOut(View view) {
+        Intent logOutIntent = new Intent(this, LoginPage.class);
+        startActivity(logOutIntent);
+    }
 }
