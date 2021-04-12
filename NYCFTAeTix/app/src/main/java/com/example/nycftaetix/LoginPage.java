@@ -3,15 +3,14 @@ package com.example.nycftaetix;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+
+
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,6 +38,7 @@ public class LoginPage extends AppCompatActivity {
         submitButton = findViewById(R.id.loginSubmit);
         mEmail = findViewById(R.id.signUpEmail);
         mPassword = findViewById(R.id.passwordLogin);
+        counter = 0;
 
 
         //checking to see if editText fields are empty. If they are, don't log in person, otherwise login
@@ -53,7 +53,6 @@ public class LoginPage extends AppCompatActivity {
             }
         });
         //retrieving an instance of database, and referencing the location it should write to
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         database = FirebaseDatabase.getInstance();
         info = database.getReference().child("users");
         info.keepSynced(true);
@@ -61,10 +60,9 @@ public class LoginPage extends AppCompatActivity {
         info.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                counter = 0;
-                for(DataSnapshot ds : snapshot.getChildren()) {
-                    SignIn users = (SignIn) ds.getValue(SignIn.class);
-                    Log.i(TAG, counter + " Email: " + users.getEmail() + " password: " + users.getPassword());
+                for(DataSnapshot data : snapshot.getChildren()){
+                    SignIn users = (SignIn) data.getValue(SignIn.class);
+                    Log.i(TAG, counter + "Email: " + users.getEmail() + " password: " + users.getPassword());
                     counter++;
                 }
             }
@@ -75,17 +73,15 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     public void submitLogin(View view) {
-        String increment = Long.toString(counter);
+        long increment = counter;
         String pwd = mPassword.getText().toString();
         String em = mEmail.getText().toString();
 
         SignIn u = new SignIn(em, pwd);
-        info.child(increment).setValue(u);
+        info.child(String.valueOf(increment)).setValue(u);
 
         //clearing text after button has been clicked
         mEmail.getText().clear();

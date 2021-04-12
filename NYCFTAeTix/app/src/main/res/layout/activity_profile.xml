@@ -202,7 +202,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/maps_tickets_button"
+        android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -246,7 +246,7 @@
         android:text="@string/profile_button"
         app:chipBackgroundColor="#D3CFCF"
         app:chipSurfaceColor="@android:color/darker_gray"
-        app:layout_constraintEnd_toStartOf="@+id/maps_tickets_button"
+        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
         app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />

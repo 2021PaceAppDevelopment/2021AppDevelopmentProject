@@ -8,7 +8,7 @@
     tools:context=".Tickets">
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/maps_tickets_button"
+        android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -54,7 +54,7 @@
         app:chipSurfaceColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/maps_tickets_button"
+        app:layout_constraintStart_toStartOf="@+id/maps_profile_tickets_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_tickets_button" />
+        app:layout_constraintTop_toBottomOf="@+id/maps_profile_tickets_button" />
 
     <TextView
         android:id="@+id/one_way_textView"

@@ -1,24 +1,52 @@
 package com.example.nycftaetix;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.widget.SearchView;
+
+import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.maps.GeoApiContext;
+
+import java.io.IOException;
+import java.util.List;
+
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
+    private static final int REQUEST_CODE = 1;
+    private Location currentLocation;
     private MapView mapView;
-    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private FusedLocationProviderClient mFusedLocationClient;
+    private String TAG = "MAP_ACTIVITY";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,26 +54,69 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map);
 
         Bundle mapViewBundle = null;
-        if(savedInstanceState != null){
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
-        mapView = (MapView) findViewById(R.id.mapView);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // MapView is in a bundle to save current state before being destroyed
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
+        getLocation();
+
+
+    }
+    @Override
+    public void onMapReady(GoogleMap map) {
+        LatLng lng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        // Creating pin for map
+        MarkerOptions options = new MarkerOptions().position(lng).title("Current location");
+        map.animateCamera(CameraUpdateFactory.newLatLng(lng));
+        // Allows users to zoom in and out of maps
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 20));
+        // Adds a pin to the map
+        map.addMarker(options);
+
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-
-        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if(mapViewBundle == null){
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+    // Will retrieve current location of user
+    private void getLocation() {
+        Log.d(TAG, "getLocation called");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
         }
+       Task<Location> locationTask = mFusedLocationClient.getLastLocation();
+        locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // Checks to make sure that location isn't null. On rare occassions this could happen when using FusedLocationClient
+                if(location != null){
+                    currentLocation = location;
+                    Log.d(TAG, "Longitude and latitude coordinates: " + currentLocation.getLongitude() + " " + currentLocation.getLatitude());
+                    assert mapView != null;
+                    mapView.getMapAsync(Map.this);
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
         mapView.onSaveInstanceState(mapViewBundle);
     }
 
+    // Below methods are needed with mapViews
     @Override
     protected void onResume() {
         super.onResume();
@@ -64,21 +135,27 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mapView.onStop();
     }
 
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // When permission is granted, the getLocation method finds the location of user.
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation();
+            }
+        }
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mapView.onPause();
+        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mapView.onDestroy();
+        super.onDestroy();
     }
 
     @Override
