@@ -11,13 +11,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.widget.SearchView;
-
-import android.widget.Toast;
+import android.widget.SearchView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,6 +41,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
     private FusedLocationProviderClient mFusedLocationClient;
     private String TAG = "MAP_ACTIVITY";
+    private GoogleMap gMap;
+    private SearchView searchView;
 
 
 
@@ -57,12 +56,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
+        // initializing fused location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // initializing search view
+        searchView =  findViewById(R.id.searchView);
 
         // MapView is in a bundle to save current state before being destroyed
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
         getLocation();
+        searchLocation();
 
 
     }
@@ -73,9 +77,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         MarkerOptions options = new MarkerOptions().position(lng).title("Current location");
         map.animateCamera(CameraUpdateFactory.newLatLng(lng));
         // Allows users to zoom in and out of maps
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 20));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 15));
         // Adds a pin to the map
         map.addMarker(options);
+
+        gMap = map;
 
     }
 
@@ -91,7 +97,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                // Checks to make sure that location isn't null. On rare occassions this could happen when using FusedLocationClient
+                // Checks to make sure that location isn't null. On rare occasions this could happen when using FusedLocationClient
                 if(location != null){
                     currentLocation = location;
                     Log.d(TAG, "Longitude and latitude coordinates: " + currentLocation.getLongitude() + " " + currentLocation.getLatitude());
@@ -102,7 +108,41 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
 
+    // This method is for the Search view which will allow users to search for a location
+    private void searchLocation(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Retrieving location name from search view
+                String locationSearch = searchView.getQuery().toString();
 
+                //creating a list of address where addresses will be stored
+                List<Address> addressList = null;
+
+                if(locationSearch != null || locationSearch.equals("")){
+                    Geocoder geocoder = new Geocoder(Map.this);
+                    try{
+                        addressList = geocoder.getFromLocationName(locationSearch, 1);
+                    }catch (IOException e){
+                        Log.d(TAG, "search view: " + e.getLocalizedMessage());
+                    }
+                    assert addressList != null;
+                    Address address =  addressList.get(0);
+
+                    LatLng lng = new LatLng(address.getLatitude(), address.getLongitude());
+                    gMap.addMarker(new MarkerOptions().position(lng).title(locationSearch));
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 15));
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
