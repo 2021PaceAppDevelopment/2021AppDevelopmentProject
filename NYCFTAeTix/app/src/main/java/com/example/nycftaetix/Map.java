@@ -22,16 +22,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.GeoApiContext;
-
-import java.io.IOException;
 import java.util.List;
+
 
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
@@ -43,7 +41,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private String TAG = "MAP_ACTIVITY";
     private GoogleMap gMap;
     private SearchView searchView;
-
+    private Polyline mRouteLine;
 
 
 
@@ -123,11 +121,12 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     Geocoder geocoder = new Geocoder(Map.this);
                     try{
                         addressList = geocoder.getFromLocationName(locationSearch, 1);
-                    }catch (IOException e){
-                        Log.d(TAG, "search view: " + e.getLocalizedMessage());
+                    }catch (Exception e){
+                        Log.d(TAG, "search view: " + e.getMessage());
                     }
                     assert addressList != null;
                     Address address =  addressList.get(0);
+
 
                     LatLng lng = new LatLng(address.getLatitude(), address.getLongitude());
                     gMap.addMarker(new MarkerOptions().position(lng).title(locationSearch));
@@ -144,7 +143,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -155,6 +154,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         mapView.onSaveInstanceState(mapViewBundle);
     }
+
 
     // Below methods are needed with mapViews
     @Override

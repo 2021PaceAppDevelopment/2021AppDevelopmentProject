@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/maps_profile_tickets_button" />
 
-    <!--Map Fragment to show Google Maps-->
+    <!--MapView to show Google Maps-->
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -31,14 +32,15 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
+
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
-        android:layout_height="62dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
@@ -87,24 +89,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:contentDescription="@string/app_logo"
+        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fta_logo" />
 
     <!--This is a SearchView for maps. Allowing users to search for their destination-->
+
+
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:iconifiedByDefault="false"
-        android:inputType="textAutoComplete"
         android:queryHint="Search Location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
