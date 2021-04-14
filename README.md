@@ -78,4 +78,8 @@ So far, we have created a prototype of our application. We currently have a draf
 April 9, 2021:
 We added firebase database to our project. We also are currently able to find a user's location using Google maps API. 
 
+April 14, 2021:
+
+Testing of the Login and Sign up Requirments
+
 </p>
