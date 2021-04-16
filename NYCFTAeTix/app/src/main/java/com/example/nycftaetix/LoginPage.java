@@ -37,7 +37,7 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
         submitButton = findViewById(R.id.loginSubmit);
         mEmail = findViewById(R.id.signUpEmail);
-        mPassword = findViewById(R.id.passwordLogin);
+        mPassword = findViewById(R.id.signUpPassword);
         counter = 0;
 
 

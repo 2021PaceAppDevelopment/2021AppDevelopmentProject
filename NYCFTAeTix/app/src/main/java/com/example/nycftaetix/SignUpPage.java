@@ -26,6 +26,9 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
         mAuth = FirebaseAuth.getInstance();
+        email = findViewById(R.id.signUpEmail);
+        password = findViewById(R.id.signUpPassword);
+
     }
 
     @Override
