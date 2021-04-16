@@ -31,33 +31,34 @@ public class SignUpPage extends AppCompatActivity {
 
     }
 
-    @Override
+   @Override
+   // need to work on placment can tell if signed in and will pull you in, may need to be on another page
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            recreate();
+            startActivity(new Intent(this,Profile.class));
         }
     }
 
+
+
     public void SubmitSignUp(View view) {
-        mAuth.createUserWithEmailAndPassword(email.toString(), password.toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpPage.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
+       // Log.i("SIGN UP PAGE", "This is email: " + email.toString() + ", This is Password: " + password.toString());
+        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(SignUpPage.this, "This email might not be valid or is already in use",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
                     }
                 });
 
@@ -70,7 +71,7 @@ public class SignUpPage extends AppCompatActivity {
             startActivity(new Intent(this,Profile.class));
 
         }else {
-            Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"U Didnt sign in",Toast.LENGTH_LONG).show();
         }
 
     }
