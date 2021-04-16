@@ -46,6 +46,7 @@ public class SignUpPage extends AppCompatActivity {
 
     public void SubmitSignUp(View view) {
        // Log.i("SIGN UP PAGE", "This is email: " + email.toString() + ", This is Password: " + password.toString());
+        
         mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
