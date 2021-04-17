@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +30,7 @@ public class LoginPage extends AppCompatActivity {
     private EditText mPassword;
     private long counter;
     private Button submitButton;
+    private FirebaseAuth mAuth;
 
     private DatabaseReference info;
     private FirebaseDatabase database;
@@ -35,13 +41,14 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+        mAuth = FirebaseAuth.getInstance();
         submitButton = findViewById(R.id.loginSubmit);
         mEmail = findViewById(R.id.signUpEmail);
         mPassword = findViewById(R.id.signUpPassword);
         counter = 0;
 
 
-        //checking to see if editText fields are empty. If they are, don't log in person, otherwise login
+       /* //checking to see if editText fields are empty. If they are, don't log in person, otherwise login
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +79,32 @@ public class LoginPage extends AppCompatActivity {
                 Log.w(TAG, "Getting username and email failed", error.toException());
 
             }
-        });
+        });*/
     }
 
     public void submitLogin(View view) {
-        long increment = counter;
+            // [START sign_in_with_email]
+            mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
+                    .addOnCompleteListener(this, task -> {
+                        Log.i("LoginPageInput","This is Email: " +mEmail.getText().toString()+ "This is Password "+mPassword.getText());
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginPage.this, "Wrong Email and/or Password",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    });
+            // [END sign_in_with_email]
+
+
+
+        /*long increment = counter;
         String pwd = mPassword.getText().toString();
         String em = mEmail.getText().toString();
 
@@ -89,7 +117,19 @@ public class LoginPage extends AppCompatActivity {
 
         //Once logged in goes to ticket page
         Intent profileIntent = new Intent(this, Tickets.class);
-        startActivity(profileIntent);
+        startActivity(profileIntent);*/
+    }
+
+
+    private void updateUI(FirebaseUser user) {
+        if(user != null){
+            Toast.makeText(this,"You Signed in!",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,Profile.class));
+
+        }else {
+            Toast.makeText(this,"Your Sign in has failed",Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }
