@@ -151,7 +151,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/one_way_textView"
-        app:layout_constraintTop_toBottomOf="@+id/wallet" />
+        app:layout_constraintTop_toBottomOf="@+id/wallet"
+        android:onClick="ActivateTicket"/>
 
     <TextView
         android:id="@+id/weekly_textView"
@@ -177,7 +178,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/weekly_textView"
-        app:layout_constraintTop_toBottomOf="@+id/activate_button" />
+        app:layout_constraintTop_toBottomOf="@+id/activate_button"
+        android:onClick="ActivateTicket"/>
 
     <TextView
         android:id="@+id/one_way_textView"

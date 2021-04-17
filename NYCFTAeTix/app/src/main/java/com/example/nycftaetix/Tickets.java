@@ -49,4 +49,9 @@ public class Tickets extends AppCompatActivity {
         activeButton.setVisibility(View.VISIBLE);
         activateButton.setVisibility(View.VISIBLE);
     }
+
+    public void ActivateTicket(View view) {
+        Intent TicketPurchased = new Intent(this, TicketPurchase.class);
+        startActivity(TicketPurchased);
+    }
 }
