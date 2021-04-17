@@ -31,7 +31,7 @@ public class SignUpPage extends AppCompatActivity {
 
     }
 
-   @Override
+   //@Override
    // need to work on placment can tell if signed in and will pull you in, may need to be on another page
 /*    public void onStart() {
         super.onStart();
