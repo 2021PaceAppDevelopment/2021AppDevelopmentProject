@@ -82,4 +82,10 @@ April 14, 2021:
 
 Testing of the Login and Sign up Requirments
 
+April 19, 2021:
+
+PolyLines added to Google Maps. Users are able to search for a location. 
+
+Added Login and signup authentication. Login checks for registered users. Signup allows users to enter valid email (not used prior) and password. 
+
 </p>
