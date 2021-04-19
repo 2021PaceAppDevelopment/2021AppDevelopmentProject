@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFFFF"
+    tools:context=".Tickets">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/maps_profile_tickets_button"
+        android:layout_width="234dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/profile_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FBFFFF"
+            android:onClick="onProfile"
+            android:text="@string/profile_button"
+            android:textColor="#191717"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="#D3CFCF" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/map_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onMap"
+            android:text="@string/maps_button"
+            android:textColor="#191717"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="#D3CFCF" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tickets_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onTickets"
+            android:text="@string/tickets_button"
+            android:textColor="#191717"
+            android:textSize="14sp"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="#D3CFCF" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fta_logo" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/ticket_option_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/buy_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/purchase_tickets_tv">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/one_way_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/one_way_chip"
+            android:textColor="#FFFFFF"
+            app:chipBackgroundColor="#C3B0EA" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/weekly_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/weekly_chip"
+            android:textColor="#FFFFFF"
+            app:chipBackgroundColor="#C3B0EA" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/monthly_ticket_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/monthly_chip"
+            android:textColor="#FFFFFF"
+            app:chipBackgroundColor="#C3B0EA" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/purchase_tickets_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="#004FB1"
+        android:gravity="center_horizontal"
+        android:text="@string/purchase_tickets_tv"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/active_button" />
+
+    <Button
+        android:id="@+id/buy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buy_button"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_option_chip" />
+
+    <Button
+        android:id="@+id/activate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/activate"
+        android:visibility="invisible"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintBottom_toTopOf="@+id/active_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/one_way_textView"
+        app:layout_constraintTop_toBottomOf="@+id/wallet" />
+
+    <TextView
+        android:id="@+id/weekly_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weekly_chip"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/active_button"
+        app:layout_constraintEnd_toStartOf="@+id/active_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/active_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/active"
+        android:visibility="invisible"
+        app:backgroundTint="#004FB1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/weekly_textView"
+        app:layout_constraintTop_toBottomOf="@+id/activate_button" />
+
+    <TextView
+        android:id="@+id/one_way_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/one_way_chip"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/activate_button"
+        app:layout_constraintEnd_toStartOf="@+id/activate_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:onClick="onWallet"
+        android:text="@string/wallet"
+        android:textColor="#191717"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:chipIcon="@drawable/baseline_arrow_drop_down_20"
+        app:chipIconEnabled="true"
+        app:chipIconTint="#191717"
+        app:chipStrokeColor="#918F8F"
+        app:chipSurfaceColor="#D3CFCF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maps_profile_tickets_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

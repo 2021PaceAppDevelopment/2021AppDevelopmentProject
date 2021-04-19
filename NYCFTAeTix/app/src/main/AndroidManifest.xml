@@ -29,6 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCmdSBzCOfTNMQvE47U1MduckXNNUdcoho" />
 
+
         <activity android:name=".Map" />
         <activity android:name=".Tickets" />
         <activity android:name=".Profile"/>

@@ -35,10 +35,10 @@
     <string name="LoginPassword">ENTER PASSWORD</string>
     <string name="LoginEmail">ENTER EMAIL</string>
     <string name="submit_button_logIn">SUBMIT</string>
-    <string name="api_key">AIzaSyCmdSBzCOfTNMQvE47U1MduckXNNUdcoho</string>
     <string name="map_id">73684aebf771a010</string>
     <string name="wallet">Wallet</string>
     <string name="active">ACTIVE</string>
     <string name="activate">ACTIVATE</string>
+    <string name="api_key" translatable="false">AIzaSyCmdSBzCOfTNMQvE47U1MduckXNNUdcoho</string>
     <string name="buy_button">BUY</string>
 </resources>

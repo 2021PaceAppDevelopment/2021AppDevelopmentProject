@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "493979802817",
+    "project_id": "nyc-ftaetix-e6aef",
+    "storage_bucket": "nyc-ftaetix-e6aef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493979802817:android:1cbc2a362a9cae3c80c840",
+        "android_client_info": {
+          "package_name": "com.example.nycftaetix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493979802817-dpgue4as1490p3kad2qjupab2ilfpmtm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nycftaetix",
+            "certificate_hash": "fdc2ca66c33f43dbc0c2f2ab821cc159ad29b283"
+          }
+        },
+        {
+          "client_id": "493979802817-n49i005jtadu9bfgsplpilddg2e763tr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk9YoL7ro6yRy1HDE5FJA-MdQxReE3PyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493979802817-n49i005jtadu9bfgsplpilddg2e763tr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

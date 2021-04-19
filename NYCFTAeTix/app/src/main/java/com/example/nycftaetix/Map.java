@@ -3,14 +3,18 @@ package com.example.nycftaetix;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
@@ -23,25 +27,42 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
+import com.google.maps.PendingResult;
+import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.TransitRoutingPreference;
+import com.google.maps.model.TravelMode;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class Map extends AppCompatActivity implements OnMapReadyCallback {
+public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
     private static final int REQUEST_CODE = 1;
     private Location currentLocation;
     private MapView mapView;
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
     private FusedLocationProviderClient mFusedLocationClient;
-    private String TAG = "MAP_ACTIVITY";
+    private final String TAG = "MAP_ACTIVITY";
     private GoogleMap gMap;
     private SearchView searchView;
-    private Polyline mRouteLine;
+    private LatLng latLngOne;
+    private  LatLng latLngTwo;
+    private GeoApiContext geoApiContext;
+    //ArrayList to store PolyLine Information
+    private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
 
 
 
@@ -54,11 +75,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
+        if(geoApiContext == null){
+            //used to calculate
+            geoApiContext = new GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build();
+        }
         // initializing fused location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // initializing search view
         searchView =  findViewById(R.id.searchView);
+
+        Places.initialize(getApplicationContext(), getString(R.string.api_key));
 
         // MapView is in a bundle to save current state before being destroyed
         mapView = findViewById(R.id.mapView);
@@ -70,9 +97,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     }
     @Override
     public void onMapReady(GoogleMap map) {
-        LatLng lng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+       LatLng lng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
+
         // Creating pin for map
-        MarkerOptions options = new MarkerOptions().position(lng).title("Current location");
+        MarkerOptions options = new MarkerOptions().position(lng).title(String.valueOf(lng));
         map.animateCamera(CameraUpdateFactory.newLatLng(lng));
         // Allows users to zoom in and out of maps
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 15));
@@ -80,6 +109,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         map.addMarker(options);
 
         gMap = map;
+        map.setOnPolylineClickListener(this);
+
 
     }
 
@@ -98,16 +129,18 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 // Checks to make sure that location isn't null. On rare occasions this could happen when using FusedLocationClient
                 if(location != null){
                     currentLocation = location;
+                    latLngOne = new LatLng(currentLocation.getLongitude(), currentLocation.getLatitude());
                     Log.d(TAG, "Longitude and latitude coordinates: " + currentLocation.getLongitude() + " " + currentLocation.getLatitude());
                     assert mapView != null;
                     mapView.getMapAsync(Map.this);
                 }
             }
+
         });
     }
 
     // This method is for the Search view which will allow users to search for a location
-    private void searchLocation(){
+    public void searchLocation(){
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -127,10 +160,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     assert addressList != null;
                     Address address =  addressList.get(0);
 
-
-                    LatLng lng = new LatLng(address.getLatitude(), address.getLongitude());
-                    gMap.addMarker(new MarkerOptions().position(lng).title(locationSearch));
-                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 15));
+                    Marker locMarker;
+                    latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
+                    locMarker = gMap.addMarker(new MarkerOptions().position(latLngTwo).title(locationSearch));
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
+                    retrieveDirections(locMarker);
 
                 }
                 return false;
@@ -142,6 +176,93 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
     }
+
+    private void retrieveDirections(Marker mapMarker){
+        com.google.maps.model.LatLng dest = new  com.google.maps.model.LatLng(
+                mapMarker.getPosition().latitude, mapMarker.getPosition().longitude);
+        DirectionsApiRequest directionsApiRequest = new DirectionsApiRequest(geoApiContext);
+        directionsApiRequest.alternatives(true)
+                .mode(TravelMode.TRANSIT)
+                .origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
+                .destination(dest).setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                Log.d(TAG, "Result routes:" + result.routes[0].toString());
+                Log.d(TAG, "Result routes duration:" + result.routes[0].legs[0].duration);
+                Log.d(TAG, "Result routes distance:" + result.routes[0].legs[0].distance);
+                Log.d(TAG, "Result routes way points:" + result.geocodedWaypoints[0].toString());
+                polyLines(result);
+
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                Log.e(TAG, "Unable to retrieve directions. Error: " + e.getMessage() + " " + e.toString());
+            }
+        });
+
+        Log.d(TAG, "retrieveDirections method " + dest.toString());
+    }
+
+    /**
+     * This method will add polyLines between
+     * users location and user searched location
+     * @param result
+     */
+    private void polyLines(DirectionsResult result){
+       new Handler(Looper.getMainLooper()).post(new Runnable() {
+           @Override
+           public void run() {
+               //checking for duplicates
+               if (polylineInfos.size() > 0){
+                   for (PolylineInfo polylineInfo : polylineInfos){
+                       //removing the duplicate
+                       polylineInfo.getLine().remove();
+                   }
+                   polylineInfos.clear();
+                   polylineInfos = new ArrayList<>();
+               }
+               for (DirectionsRoute directionsRoute : result.routes){
+                   List<com.google.maps.model.LatLng> path = PolylineEncoding.decode(
+                           directionsRoute.overviewPolyline.getEncodedPath());
+                   List<LatLng> newPath = new ArrayList<>();
+
+                   // Retrieving all coordinates to make a polyline
+                   for(com.google.maps.model.LatLng latLng: path){
+                       newPath.add(new LatLng(latLng.lat, latLng.lng));
+                       Log.d(TAG, "run and leg " + latLng.toString());
+                   }
+
+                   Log.d(TAG, "run and leg " + directionsRoute.legs[0].toString());
+                   Polyline line = gMap.addPolyline(new PolylineOptions().addAll(newPath));
+                   line.setWidth(10);
+                   line.setColor(Color.GRAY);
+                   line.setClickable(true);
+                   //Getting reference from direction and polyline
+                   polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
+               }
+           }
+       });
+    }
+
+    /*
+    * If the polyline has the same id as the one that was clicked,
+    * that polyline will turn blue, otherwise it will stay gray
+    *
+    *
+    */
+    public void onPolylineClick(Polyline polyline) {
+        for (PolylineInfo info : polylineInfos){
+            if(polyline.getId().equals(info.getLine().getId())){
+                info.getLine().setColor(Color.BLUE);
+                info.getLine().setZIndex(1);
+            }else{
+                info.getLine().setColor(Color.GRAY);
+                info.getLine().setZIndex(0);
+            }
+        }
+    }
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -154,6 +275,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         mapView.onSaveInstanceState(mapViewBundle);
     }
+
+
 
 
     // Below methods are needed with mapViews
@@ -218,3 +341,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         startActivity(profileIntent);
     }
 }
+/*                    DirectionsApiRequest result = DirectionsApi.newRequest(geoApiContext)
+                            .mode(TravelMode.TRANSIT)
+                            .alternatives(true).origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
+                            .destination(new com.google.maps.model.LatLng(address.getLatitude(), address.getLongitude()));
+*/
