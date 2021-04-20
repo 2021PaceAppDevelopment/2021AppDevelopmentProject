@@ -48,6 +48,7 @@ import com.google.maps.PendingResult;
 import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.Duration;
 import com.google.maps.model.TransitMode;
 import com.google.maps.model.TransitRoutingPreference;
 import com.google.maps.model.TravelMode;
@@ -57,8 +58,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-//GoogleMap.OnPolylineClickListener
-public class Map extends AppCompatActivity implements OnMapReadyCallback {
+public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
     private static final int REQUEST_CODE = 1;
     private Location currentLocation;
     private MapView mapView;
@@ -74,6 +74,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
     private AutocompleteSupportFragment autocompleteSupportFragment;
     private PlacesClient placesClient;
+    private Marker selected = null;
     private String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
 
 
@@ -103,57 +104,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
         placesClient = Places.createClient(this);
 
-
-        // initializing autoComplete
-        autocompleteSupportFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autoComplete_fragment);
-
-        assert autocompleteSupportFragment != null;
-        autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
-        autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(new LatLng(40.74918831638174, -73.99070172291377),
-                new LatLng(40.74918831638174, -73.99070172291377)));
-        autocompleteSupportFragment.setCountries("USA");
-
-        //specify types of place data to return
-        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS));
-        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                String dest = place.getName();
-                List<Address> addressList = null;
-                if(dest != null || dest.equals("")){
-                    Geocoder geocoder = new Geocoder(Map.this);
-                    try{
-                        addressList = geocoder.getFromLocationName(dest, 1);
-                    }catch (Exception e){
-                        Log.d(TAG, "onPlaceSelected: " + e.getMessage() + " " + e.toString());
-
-                    }
-                    assert addressList != null;
-                    Address address = addressList.get(0);
-                    Marker mark;
-                    latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
-                    mark = gMap.addMarker(new MarkerOptions().position(latLngTwo).title(dest));
-                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
-                    retrieveDirections(mark);
-                }
-
-
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
-            }
-
-            @Override
-            public void onError(@NonNull Status status) {
-                Log.i(TAG, "AutoComplete Error. Could no get place id and name " + status);
-
-            }
-        });
+        setAutocompleteSupportFragment();
         // MapView is in a bundle to save current state before being destroyed
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
         getLocation();
-        //searchLocation();
-
 
     }
     @Override
@@ -170,9 +125,62 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         map.addMarker(options);
 
         gMap = map;
-        //map.setOnPolylineClickListener(this);
+        //Allows user to decide which route they would like to take
+        map.setOnPolylineClickListener(this);
 
 
+    }
+
+    private void setAutocompleteSupportFragment(){
+        // initializing autoComplete
+        autocompleteSupportFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autoComplete_fragment);
+
+        assert autocompleteSupportFragment != null;
+        autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
+        autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(new LatLng(40.74918831638174, -73.99070172291377),
+                new LatLng(40.74918831638174, -73.99070172291377)));
+        autocompleteSupportFragment.setCountries("USA");
+
+        //specify types of place data to return
+        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS));
+        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                String dest = place.getName();
+                Address address;
+                List<Address> addressList = null;
+                if(dest != null){
+                    Geocoder geocoder = new Geocoder(Map.this);
+                    try{
+                        addressList = geocoder.getFromLocationName(dest, 1);
+                    }catch (Exception e){
+                        Log.d(TAG, "onPlaceSelected: " + e.getMessage() + " " + e.toString());
+
+                    }
+
+                    assert addressList != null;
+                    address = addressList.get(0);
+                    Marker mark;
+
+                    latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
+                    mark = gMap.addMarker(new MarkerOptions().position(latLngTwo).title(dest));
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
+                    selected = mark;
+                    retrieveDirections(mark);
+
+                }
+
+
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                Log.i(TAG, "AutoComplete Error. Could no get place id and name " + status);
+
+            }
+        });
     }
 
     // Will retrieve current location of user
@@ -206,6 +214,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 mapMarker.getPosition().latitude, mapMarker.getPosition().longitude);
         DirectionsApiRequest directionsApiRequest = new DirectionsApiRequest(geoApiContext);
         directionsApiRequest.alternatives(true)
+                .mode(TravelMode.WALKING)
+                .mode(TravelMode.TRANSIT)
                 .transitMode(TransitMode.BUS)
                 .origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
                 .destination(dest).setCallback(new PendingResult.Callback<DirectionsResult>() {
@@ -215,6 +225,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 Log.d(TAG, "Result routes duration:" + result.routes[0].legs[0].duration);
                 Log.d(TAG, "Result routes distance:" + result.routes[0].legs[0].distance);
                 Log.d(TAG, "Result routes way points:" + result.geocodedWaypoints[0].toString());
+                //Duration duration = result.routes[0].legs[0].duration;
                 polyLines(result);
 
             }
@@ -265,6 +276,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                    line.setClickable(true);
                    //Getting reference from direction and polyline
                    polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
+                   //onPolylineClick(line);
+                   //selected.setVisible(false);
                }
            }
        });
@@ -282,10 +295,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 info.getLine().setColor(Color.BLUE);
                 info.getLine().setZIndex(1);
 
-                LatLng newLoc = new LatLng(info.getLeg().endLocation.lat, info.getLeg().endLocation.lat);
-
-                Marker mark = gMap.addMarker(new MarkerOptions().position(newLoc).snippet("Duration: " + info.getLeg().duration));
-                mark.showInfoWindow();
             }else{
                 info.getLine().setColor(Color.GRAY);
                 info.getLine().setZIndex(0);
@@ -371,46 +380,3 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         startActivity(profileIntent);
     }
 }
-/*                    DirectionsApiRequest result = DirectionsApi.newRequest(geoApiContext)
-                            .mode(TravelMode.TRANSIT)
-                            .alternatives(true).origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
-                            .destination(new com.google.maps.model.LatLng(address.getLatitude(), address.getLongitude()));
-*/
-
-// This method is for the Search view which will allow users to search for a location
-    /*public void searchLocation(){
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Retrieving location name from search view
-                String locationSearch = searchView.getQuery().toString();
-
-                //creating a list of address where addresses will be stored
-                List<Address> addressList = null;
-
-                if(locationSearch != null || locationSearch.equals("")){
-                    Geocoder geocoder = new Geocoder(Map.this);
-                    try{
-                        addressList = geocoder.getFromLocationName(locationSearch, 1);
-                    }catch (Exception e){
-                        Log.d(TAG, "search view: " + e.getMessage());
-                    }
-                    assert addressList != null;
-                    Address address =  addressList.get(0);
-
-                    Marker locMarker;
-                    latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
-                    locMarker = gMap.addMarker(new MarkerOptions().position(latLngTwo).title(locationSearch));
-                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
-                    retrieveDirections(locMarker);
-
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-    }*/

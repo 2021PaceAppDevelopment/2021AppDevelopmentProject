@@ -85,30 +85,33 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/one_way_chip"
             android:textColor="#FFFFFF"
-            app:chipBackgroundColor="#C3B0EA" />
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onOneWayTickets"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/weekly_ticket_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:clickable="true"
             android:text="@string/weekly_chip"
+            android:onClick="onWeeklyTickets"
             android:textColor="#FFFFFF"
-            app:chipBackgroundColor="#C3B0EA" />
+            android:focusable="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/monthly_ticket_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/monthly_chip"
+            android:clickable="true"
             android:textColor="#FFFFFF"
-            app:chipBackgroundColor="#C3B0EA" />
+            android:focusable="true"
+            android:onClick="onMonthlyTickets"/>
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
@@ -145,7 +148,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="60dp"
         android:text="@string/activate"
-        android:visibility="invisible"
         app:backgroundTint="#004FB1"
         app:layout_constraintBottom_toTopOf="@+id/active_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +163,6 @@
         android:text="@string/weekly_chip"
         android:textColor="@android:color/tertiary_text_dark"
         android:textSize="18sp"
-        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/active_button"
         app:layout_constraintEnd_toStartOf="@+id/active_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -173,7 +174,6 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:text="@string/active"
-        android:visibility="invisible"
         app:backgroundTint="#004FB1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -188,7 +188,6 @@
         android:text="@string/one_way_chip"
         android:textColor="@android:color/tertiary_text_dark"
         android:textSize="18sp"
-        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/activate_button"
         app:layout_constraintEnd_toStartOf="@+id/activate_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -199,12 +198,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:onClick="onWallet"
         android:text="@string/wallet"
         android:textColor="#191717"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:chipIcon="@drawable/baseline_arrow_drop_down_20"
         app:chipIconEnabled="true"
         app:chipIconTint="#191717"
         app:chipStrokeColor="#918F8F"

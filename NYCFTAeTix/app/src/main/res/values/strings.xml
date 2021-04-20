@@ -41,4 +41,5 @@
     <string name="activate">ACTIVATE</string>
     <string name="api_key" translatable="false">AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k</string>
     <string name="buy_button">BUY</string>
+    <string name="negativeButton">No</string>
 </resources>
