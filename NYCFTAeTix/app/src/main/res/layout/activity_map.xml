@@ -94,7 +94,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fta_logo" />
 
-    <!--This is a SearchView for maps. Allowing users to search for their destination-->
+    <!--This is a SearchView for maps. Allowing users to search for their destination
 
 
     <SearchView
@@ -107,7 +107,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/destination_textView" /> -->
+
+    <!--Search bar -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destination_textView">
+
+        <fragment
+            android:id="@+id/autoComplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#070606"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/destination_textView"
+            tools:layout="@layout/activity_map" />
+    </androidx.cardview.widget.CardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
