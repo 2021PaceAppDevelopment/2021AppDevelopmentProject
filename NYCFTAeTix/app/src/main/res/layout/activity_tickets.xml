@@ -73,8 +73,9 @@
         android:id="@+id/ticket_option_chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="93dp"
         app:chipSpacingHorizontal="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/buy_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,11 +86,11 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/one_way_chip"
-            android:textColor="#FFFFFF"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="onOneWayTickets"/>
+            android:onClick="onOneWayTickets"
+            android:text="@string/one_way_chip"
+            android:textColor="#FFFFFF" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/weekly_ticket_chip"
@@ -97,21 +98,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:text="@string/weekly_chip"
+            android:focusable="true"
             android:onClick="onWeeklyTickets"
-            android:textColor="#FFFFFF"
-            android:focusable="true" />
+            android:text="@string/weekly_chip"
+            android:textColor="#FFFFFF" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/monthly_ticket_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/monthly_chip"
             android:clickable="true"
-            android:textColor="#FFFFFF"
             android:focusable="true"
-            android:onClick="onMonthlyTickets"/>
+            android:onClick="onMonthlyTickets"
+            android:text="@string/monthly_chip"
+            android:textColor="#FFFFFF" />
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
@@ -129,17 +130,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/active_button" />
 
-    <Button
-        android:id="@+id/buy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/buy_button"
-        app:backgroundTint="#004FB1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ticket_option_chip" />
 
     <Button
         android:id="@+id/activate_button"
@@ -148,13 +138,13 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="60dp"
         android:text="@string/activate"
-        app:backgroundTint="#004FB1"
+        android:onClick="ActivateTicket"
+        app:backgroundTint="#83868A"
         app:layout_constraintBottom_toTopOf="@+id/active_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/one_way_textView"
-        app:layout_constraintTop_toBottomOf="@+id/wallet"
-        android:onClick="ActivateTicket"/>
+        app:layout_constraintTop_toBottomOf="@+id/wallet" />
 
     <TextView
         android:id="@+id/weekly_textView"
@@ -174,12 +164,12 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:text="@string/active"
-        app:backgroundTint="#004FB1"
+        android:onClick="ActivateTicket"
+        app:backgroundTint="#83868A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/weekly_textView"
-        app:layout_constraintTop_toBottomOf="@+id/activate_button"
-        android:onClick="ActivateTicket"/>
+        app:layout_constraintTop_toBottomOf="@+id/activate_button" />
 
     <TextView
         android:id="@+id/one_way_textView"
