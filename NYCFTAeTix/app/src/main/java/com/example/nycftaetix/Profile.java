@@ -1,19 +1,38 @@
 package com.example.nycftaetix;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
 
 
 public class Profile extends AppCompatActivity {
+    private FragmentManager fragmentManager;
+    private Fragment fragment = null;
+    private FirebaseAuth firebaseAuth;
+    private TextView textViewemailname;
+    private DatabaseReference databaseReference;
+    private EditText cNumber;
+    private EditText CVN;
+    private EditText Month;
+    private FirebaseStorage firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
     }
 
     public void onTickets(View view) {
