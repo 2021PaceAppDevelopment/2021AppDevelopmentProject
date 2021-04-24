@@ -1,6 +1,10 @@
 package com.example.nycftaetix;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +13,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class Profile extends AppCompatActivity {
+    private FragmentManager fragmentManager;
+    private Fragment fragment = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
