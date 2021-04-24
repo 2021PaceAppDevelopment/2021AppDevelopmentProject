@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class Profile extends AppCompatActivity {
@@ -25,13 +27,23 @@ public class Profile extends AppCompatActivity {
     private EditText cNumber;
     private EditText CVN;
     private EditText Month;
+    private EditText name;
     private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        firebaseAuth=FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null){
+            finish();
+            startActivity(new Intent(getApplicationContext(),LoginPage.class));
+        }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        cNumber = (EditText)findViewById(R.id.name_on_card);
+        CVN = (EditText)findViewById(R.id.cvv_editText);
+        
 
     }
 
