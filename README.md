@@ -66,6 +66,7 @@ Technologies: <br>
  Android Studio <br>
  Google MAPs API <br>
  Firebase <br>
+ QR CODE Package<br>
 
 <br>
 <h3>Current Status of Project</h3>
