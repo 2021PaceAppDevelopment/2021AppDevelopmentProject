@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
 
 
 public class Profile extends AppCompatActivity {
@@ -23,7 +24,8 @@ public class Profile extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private EditText cNumber;
     private EditText CVN;
-    private
+    private EditText Month;
+    private FirebaseStorage firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

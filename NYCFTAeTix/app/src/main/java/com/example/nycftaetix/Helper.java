@@ -11,7 +11,7 @@ public class Helper {
     public static final String Month = "00";
     public static final String Year = "00";
 
-    public Userinfromation(){
+   /* public Userinfromation(){
 
     }
     public Userinformation(String email, String cNumber, String CVN, String Month, String Year, String name){
@@ -21,7 +21,7 @@ public class Helper {
         this.Month = Month;
         this.Year = Year;
         this.name = name;
-    }
+    }*/
 
     public String getEmail(){
         return email;
