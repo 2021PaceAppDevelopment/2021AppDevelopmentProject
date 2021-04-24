@@ -1,6 +1,7 @@
 package com.example.nycftaetix;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +17,13 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         mAuth = FirebaseAuth.getInstance();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
     }
 
     @Override
-    //need to work on placment can tell if signed in and will pull you in, may need to be on another page
+    //need to work on placement can tell if signed in and will pull you in, may need to be on another page
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.

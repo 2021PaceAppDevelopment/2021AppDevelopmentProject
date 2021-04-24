@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,6 +48,7 @@ import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
 import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.Duration;
@@ -53,8 +56,17 @@ import com.google.maps.model.TransitMode;
 import com.google.maps.model.TransitRoutingPreference;
 import com.google.maps.model.TravelMode;
 
+import org.xml.sax.XMLReader;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -74,7 +86,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
     private AutocompleteSupportFragment autocompleteSupportFragment;
     private PlacesClient placesClient;
-    private Marker selected = null;
+    private  Marker mark;
+    private  String snippetLocation;
+    private List<Polyline> polylines;
     private String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
 
 
@@ -95,8 +109,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         // initializing fused location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // initializing search view
-        //searchView =  findViewById(R.id.searchView);
 
         // Initializing places
         if(!Places.isInitialized()) {
@@ -117,7 +129,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
 
 
         // Creating pin for map
-        MarkerOptions options = new MarkerOptions().position(lng).title(String.valueOf(lng));
+        MarkerOptions options = new MarkerOptions().position(lng).title("Current Location");
         map.animateCamera(CameraUpdateFactory.newLatLng(lng));
         // Allows users to zoom in and out of maps
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(lng, 15));
@@ -127,10 +139,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         gMap = map;
         //Allows user to decide which route they would like to take
         map.setOnPolylineClickListener(this);
-
+        map.setOnInfoWindowClickListener(this::retrieveDirections);
 
     }
-
     private void setAutocompleteSupportFragment(){
         // initializing autoComplete
         autocompleteSupportFragment = (AutocompleteSupportFragment)
@@ -159,15 +170,19 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
 
                     }
 
+
                     assert addressList != null;
                     address = addressList.get(0);
-                    Marker mark;
 
                     latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
-                    mark = gMap.addMarker(new MarkerOptions().position(latLngTwo).title(dest));
-                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
-                    selected = mark;
+                    mark = gMap.addMarker(new MarkerOptions()
+                            .position(latLngTwo)
+                            .title(dest)
+                            .snippet(snippetLocation));
+                    mark.showInfoWindow();
                     retrieveDirections(mark);
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
+
 
                 }
 
@@ -209,24 +224,29 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     }
 
 
-    private void retrieveDirections(Marker mapMarker){
+
+    private void retrieveDirections( Marker mapMarker){
         com.google.maps.model.LatLng dest = new  com.google.maps.model.LatLng(
                 mapMarker.getPosition().latitude, mapMarker.getPosition().longitude);
+
         DirectionsApiRequest directionsApiRequest = new DirectionsApiRequest(geoApiContext);
-        directionsApiRequest.alternatives(true)
-                .mode(TravelMode.WALKING)
-                .mode(TravelMode.TRANSIT)
-                .transitMode(TransitMode.BUS)
+        directionsApiRequest.alternatives(true).mode(TravelMode.TRANSIT).transitMode(TransitMode.BUS)
                 .origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
                 .destination(dest).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
+                polyLines(result);
+                snippetLocation = "Duration: " + result.routes[0].legs[0].duration
+                        + " Distance: " + result.routes[0].legs[0].distance;
+                mapMarker.setSnippet(snippetLocation);
+
                 Log.d(TAG, "Result routes:" + result.routes[0].toString());
                 Log.d(TAG, "Result routes duration:" + result.routes[0].legs[0].duration);
                 Log.d(TAG, "Result routes distance:" + result.routes[0].legs[0].distance);
                 Log.d(TAG, "Result routes way points:" + result.geocodedWaypoints[0].toString());
                 //Duration duration = result.routes[0].legs[0].duration;
-                polyLines(result);
+//                mapMarker = gMap.addMarker(new MarkerOptions().snippet("Duration: " + result.routes[0].legs[0].distance
+//                        + "Distance: " + result.routes[0].legs[0].distance));
 
             }
 
@@ -271,13 +291,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
 
                    Log.d(TAG, "run and leg " + directionsRoute.legs[0].toString());
                    Polyline line = gMap.addPolyline(new PolylineOptions().addAll(newPath));
-                   line.setWidth(10);
+                   line.setWidth(15);
                    line.setColor(Color.GRAY);
+                   line.setGeodesic(true);
                    line.setClickable(true);
                    //Getting reference from direction and polyline
                    polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
-                   //onPolylineClick(line);
-                   //selected.setVisible(false);
+
                }
            }
        });
