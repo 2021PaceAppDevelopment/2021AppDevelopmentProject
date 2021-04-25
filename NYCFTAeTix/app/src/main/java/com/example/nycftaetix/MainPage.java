@@ -19,7 +19,6 @@ public class MainPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
     }
 
     @Override

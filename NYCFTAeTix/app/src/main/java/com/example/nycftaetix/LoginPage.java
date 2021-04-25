@@ -31,7 +31,6 @@ public class LoginPage extends AppCompatActivity {
     private long counter;
     private Button submitButton;
     private FirebaseAuth mAuth;
-
     private DatabaseReference info;
     private FirebaseDatabase database;
     private static final String TAG = "LoginPage";
@@ -43,8 +42,8 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
         mAuth = FirebaseAuth.getInstance();
         submitButton = findViewById(R.id.loginSubmit);
-        mEmail = findViewById(R.id.signUpEmail);
-        mPassword = findViewById(R.id.signUpPassword);
+        mEmail = (EditText) findViewById(R.id.signUpEmail);
+        mPassword = (EditText) findViewById(R.id.signUpPassword);
         counter = 0;
 
 

@@ -160,7 +160,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             public void onPlaceSelected(@NonNull Place place) {
                 String dest = place.getName();
                 Address address;
-                List<Address> addressList = null;
+                List<Address> addressList = new ArrayList<Address>();
                 if(dest != null){
                     Geocoder geocoder = new Geocoder(Map.this);
                     try{

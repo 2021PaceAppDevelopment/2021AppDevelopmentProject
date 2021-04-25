@@ -124,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/active_button" />
+        app:layout_constraintTop_toBottomOf="@+id/oneWay_active_button" />
 
     <Button
         android:id="@+id/buy_button"
@@ -147,7 +147,7 @@
         android:text="@string/activate"
         android:visibility="invisible"
         app:backgroundTint="#004FB1"
-        app:layout_constraintBottom_toTopOf="@+id/active_button"
+        app:layout_constraintBottom_toTopOf="@+id/oneWay_active_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/one_way_textView"
@@ -161,13 +161,13 @@
         android:textColor="@android:color/tertiary_text_dark"
         android:textSize="18sp"
         android:visibility="invisible"
-        app:layout_constraintBaseline_toBaselineOf="@+id/active_button"
-        app:layout_constraintEnd_toStartOf="@+id/active_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/oneWay_active_button"
+        app:layout_constraintEnd_toStartOf="@+id/oneWay_active_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/active_button"
+        android:id="@+id/oneWay_active_button"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"

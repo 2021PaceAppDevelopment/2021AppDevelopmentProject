@@ -41,7 +41,7 @@ public class Profile extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),LoginPage.class));
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        cNumber = (EditText)findViewById(R.id.name_on_card);
+        cNumber = (EditText)findViewById(R.id.name_on_card_editText);
         CVN = (EditText)findViewById(R.id.cvv_editText);
         
 

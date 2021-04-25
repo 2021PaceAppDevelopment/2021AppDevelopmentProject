@@ -10,7 +10,7 @@
     <string name="credit_card_expiration_date_hint">MM/YY</string>
     <string name="email_password">Password:</string>
     <string name="payment_method">Add Payment Method</string>
-    <string name="profile_button">Profile</string>
+    <string name="profile_button">PROFILE</string>
     <string name="credit_card_16_digit_number">Enter 16 digit number</string>
     <string name="credit_card_cvv">CVV</string>
     <string name="name_on_card">Name On Card</string>
@@ -39,7 +39,10 @@
     <string name="wallet">Wallet</string>
     <string name="active">ACTIVE</string>
     <string name="activate">ACTIVATE</string>
+    <string name="unavailable">UNAVAILABLE</string>
     <string name="api_key" translatable="false">AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k</string>
     <string name="buy_button">BUY</string>
     <string name="negativeButton">No</string>
+    <string name="available_after_purchase_tv">Tickets will become available after purchase.</string>
+    <string name="ftalogo">FTALogo</string>
 </resources>
