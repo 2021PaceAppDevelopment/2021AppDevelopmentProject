@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,12 +22,12 @@ public class Profile extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment fragment = null;
     private FirebaseAuth firebaseAuth;
-    private TextView textViewemailname;
+    private TextView textViewEmailName;
     private DatabaseReference databaseReference;
-    private EditText cNumber;
-    private EditText CVN;
-    private EditText Month;
-    private EditText name;
+    private TextInputEditText cNumber;
+    private TextInputEditText  CVN;
+    private TextInputEditText  Month;
+    private TextInputEditText  name;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
@@ -41,8 +41,8 @@ public class Profile extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),LoginPage.class));
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        cNumber = (EditText)findViewById(R.id.name_on_card_editText);
-        CVN = (EditText)findViewById(R.id.cvv_editText);
+        cNumber = findViewById(R.id.name_on_card_editText);
+        CVN = findViewById(R.id.cvv_editText);
         
 
     }

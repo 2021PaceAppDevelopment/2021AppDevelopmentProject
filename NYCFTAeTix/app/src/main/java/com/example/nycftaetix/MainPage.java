@@ -32,13 +32,13 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    public void Signup(View view) {
-        Intent SignupPage = new Intent(this, SignUpPage.class);
-        startActivity(SignupPage);
+    public void signUp(View view) {
+        Intent signUpPage = new Intent(this, SignUpPage.class);
+        startActivity(signUpPage);
     }
 
-    public void Login(View view) {
-        Intent LoginPage = new Intent(this, LoginPage.class);
-        startActivity(LoginPage);
+    public void login(View view) {
+        Intent loginPage = new Intent(this, LoginPage.class);
+        startActivity(loginPage);
     }
 }

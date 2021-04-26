@@ -1,10 +1,8 @@
 package com.example.nycftaetix;
 
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.Objects;
 
 public class Tickets extends AppCompatActivity {
     private Chip ticketChip;
@@ -29,7 +26,6 @@ public class Tickets extends AppCompatActivity {
     private Chip oneWayChip;
     private Chip monthlyChip;
     private Chip weeklyChip;
-    private AlertDialog alertDialogOne;
     private int buttonCounter = 0;
 
 
@@ -53,7 +49,7 @@ public class Tickets extends AppCompatActivity {
 
 
     public void onMonthlyTickets(View view) {
-        alertDialogOne = new MaterialAlertDialogBuilder(Tickets.this)
+        new MaterialAlertDialogBuilder(Tickets.this)
                 .setTitle("Purchase Tickets")
                 .setMessage("Monthly tickets cost $127.00. " +
                         "Would you like to proceed with the purchase?")
@@ -77,6 +73,7 @@ public class Tickets extends AppCompatActivity {
                                         monthlyActivateButton.setBackgroundColor(getResources().getColor(R.color.blue));
                                         monthlyActivateButton.setText(getResources().getString(R.string.activate));
                                         monthlyActivateButton();
+
                                     }
                                 }).show();
 
@@ -86,7 +83,7 @@ public class Tickets extends AppCompatActivity {
     //#004FB1
 
     public void onWeeklyTickets(View view) {
-        alertDialogOne = new MaterialAlertDialogBuilder(Tickets.this)
+        new MaterialAlertDialogBuilder(Tickets.this)
                 .setTitle("Purchase Tickets")
                 .setMessage("Weekly tickets cost $33.00. " +
                         "Would you like to proceed with the purchase?")
@@ -119,7 +116,7 @@ public class Tickets extends AppCompatActivity {
     }
 
     public void onOneWayTickets(View view) {
-        alertDialogOne = new MaterialAlertDialogBuilder(Tickets.this)
+       new MaterialAlertDialogBuilder(Tickets.this)
                 .setTitle("Purchase Tickets")
                 .setMessage("One way tickets cost $2.75. " +
                         "Would you like to proceed with the purchase?")

@@ -86,9 +86,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
     private AutocompleteSupportFragment autocompleteSupportFragment;
     private PlacesClient placesClient;
-    private  Marker mark;
-    private  String snippetLocation;
-    private List<Polyline> polylines;
+    private Marker mark;
+    private String snippetLocation;
+    private Marker selectedMarker;
     private String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
 
 
@@ -148,7 +148,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 getSupportFragmentManager().findFragmentById(R.id.autoComplete_fragment);
 
         assert autocompleteSupportFragment != null;
-        autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
+       // autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
         autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(new LatLng(40.74918831638174, -73.99070172291377),
                 new LatLng(40.74918831638174, -73.99070172291377)));
         autocompleteSupportFragment.setCountries("USA");
@@ -160,8 +160,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             public void onPlaceSelected(@NonNull Place place) {
                 String dest = place.getName();
                 Address address;
-                List<Address> addressList = new ArrayList<Address>();
-                if(dest != null){
+                List<Address> addressList = null;
+                if(dest != null && !dest.equals("")){
                     Geocoder geocoder = new Geocoder(Map.this);
                     try{
                         addressList = geocoder.getFromLocationName(dest, 1);
@@ -169,21 +169,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                         Log.d(TAG, "onPlaceSelected: " + e.getMessage() + " " + e.toString());
 
                     }
-
-
-                    assert addressList != null;
                     address = addressList.get(0);
+                    Log.d(TAG, "autocompleteSupportFramgnet method: " + address);
 
                     latLngTwo = new LatLng(address.getLatitude(), address.getLongitude());
                     mark = gMap.addMarker(new MarkerOptions()
                             .position(latLngTwo)
-                            .title(dest)
-                            .snippet(snippetLocation));
+                            .title(dest));
                     mark.showInfoWindow();
                     retrieveDirections(mark);
                     gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngTwo, 15));
-
-
+                    selectedMarker = mark;
                 }
 
 
@@ -230,14 +226,16 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 mapMarker.getPosition().latitude, mapMarker.getPosition().longitude);
 
         DirectionsApiRequest directionsApiRequest = new DirectionsApiRequest(geoApiContext);
-        directionsApiRequest.alternatives(true).mode(TravelMode.TRANSIT).transitMode(TransitMode.BUS)
+        directionsApiRequest.alternatives(true)
+                .mode(TravelMode.TRANSIT)
+                .transitMode(TransitMode.BUS)
                 .origin(new com.google.maps.model.LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
                 .destination(dest).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
                 polyLines(result);
-                snippetLocation = "Duration: " + result.routes[0].legs[0].duration
-                        + " Distance: " + result.routes[0].legs[0].distance;
+//                snippetLocation = "Duration: " + result.routes[0].legs[0].duration
+//                        + " Distance: " + result.routes[0].legs[0].distance;
                 mapMarker.setSnippet(snippetLocation);
 
                 Log.d(TAG, "Result routes:" + result.routes[0].toString());
@@ -297,8 +295,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                    line.setClickable(true);
                    //Getting reference from direction and polyline
                    polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
-
+                   onPolylineClick(line);
                }
+               selectedMarker.setVisible(false);
            }
        });
     }
@@ -314,6 +313,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             if(polyline.getId().equals(info.getLine().getId())){
                 info.getLine().setColor(Color.BLUE);
                 info.getLine().setZIndex(1);
+                LatLng endLocation = new LatLng(info.getLeg().endLocation.lat, info.getLeg().endLocation.lng);
+                Marker gMapMarker = gMap.addMarker(new MarkerOptions()
+                        .position(endLocation).title(info.getLeg().endAddress)
+                        .snippet("Duration: " + info.getLeg().duration + " Distance: "
+                                + info.getLeg().distance));
+                //+ "\n Departure Time: " + info.getLeg().departureTime
+                //                                + " Arrival time: " + info.getLeg().arrivalTime
+                gMapMarker.showInfoWindow();
 
             }else{
                 info.getLine().setColor(Color.GRAY);

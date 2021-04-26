@@ -28,7 +28,7 @@
     <string name="sign_up">SIGN UP</string>
     <string name="log_in">LOGIN</string>
     <string name="introduction">Purchase your metro card here</string>
-    <string name="Title">NyFTAeTIX</string>
+    <string name="Title">NYCFTAeTIX</string>
     <string name="login_LoginScreenTitle">LOGIN</string>
     <string name="password_login_Title">PASSWORD:</string>
     <string name="email_Login_Title">EMAIL:</string>
@@ -45,4 +45,6 @@
     <string name="negativeButton">No</string>
     <string name="available_after_purchase_tv">Tickets will become available after purchase.</string>
     <string name="ftalogo">FTALogo</string>
+    <string name="tickets_tv">TICKETS</string>
+    <string name="logo">Logo</string>
 </resources>
