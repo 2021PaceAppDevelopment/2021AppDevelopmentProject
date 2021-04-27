@@ -4,24 +4,25 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class Helper {
-    public static final String name = "Name";
-    public static final String email = "email";
-    public static final String cNumber = "1234123412341234";
-    public static final String CVN = "123";
-    public static final String Month = "00";
-    public static final String Year = "00";
+    public static String name = "Name";
+    public static String email = "email";
+    public static String cNumber = "1234123412341234";
+    public static String CVN = "123";
+    public static String Month = "00";
+    public static String Year = "00";
+    public static String date = "00/00";
 
-   /* public Userinfromation(){
+    public Helper(){
 
     }
-    public Userinformation(String email, String cNumber, String CVN, String Month, String Year, String name){
+    public Helper(String email, String cNumber, String CVN, String Month, String Year, String name){
         this.email = email;
         this.cNumber = cNumber;
         this.CVN = CVN;
         this.Month = Month;
         this.Year = Year;
         this.name = name;
-    }*/
+    }
 
     public String getEmail(){
         return email;
@@ -42,6 +43,8 @@ public class Helper {
     public String getYear(){
         return Year;
     }
+
+    public String getData() {return date;}
 
 
 /*    public static boolean isValidEmail(String email){

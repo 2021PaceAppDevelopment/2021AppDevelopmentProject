@@ -25,10 +25,10 @@ public class Profile extends AppCompatActivity {
     private TextView textViewEmailName;
     private DatabaseReference databaseReference;
 
-    private TextInputEditText cNumber;
-    private TextInputEditText  CVN;
-    private TextInputEditText  Month;
-    private TextInputEditText  name;
+    private TextInputEditText editcNumber;
+    private TextInputEditText  editCVN;
+    private TextInputEditText  editMonth;
+    private TextInputEditText  editname;
 
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
@@ -44,11 +44,9 @@ public class Profile extends AppCompatActivity {
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        cNumber = (TextInputEditText)findViewById(R.id.name_on_card);
-        CVN = (TextInputEditText) findViewById(R.id.cvv_editText);
-
-        cNumber = findViewById(R.id.name_on_card_editText);
-        CVN = findViewById(R.id.cvv_editText);
+        editcNumber= (TextInputEditText)findViewById(R.id.name_on_card);
+        editCVN = (TextInputEditText) findViewById(R.id.cvv_editText);
+        
         
 
 
