@@ -15,12 +15,9 @@ public class Helper {
     public Helper(){
 
     }
-    public Helper(String email, String cNumber, String CVN, String Month, String Year, String name, String Date){
-        this.email = email;
+    public Helper(String cNumber, String CVN, String name, String Date){
         this.cNumber = cNumber;
         this.CVN = CVN;
-        this.Month = Month;
-        this.Year = Year;
         this.name = name;
         this.date = Date;
     }
@@ -37,15 +34,9 @@ public class Helper {
         return cNumber;
     }
 
-    public String getMonth(){
-        return Month;
-    }
-
-    public String getYear(){
-        return Year;
-    }
-
     public String getData() {return date;}
+
+    public String getName() {return name;}
 
 
 /*    public static boolean isValidEmail(String email){

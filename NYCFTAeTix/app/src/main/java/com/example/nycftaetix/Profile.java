@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 public class Profile extends AppCompatActivity {
@@ -46,14 +48,12 @@ public class Profile extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),LoginPage.class));
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
         editcNumber= (TextInputEditText)findViewById(R.id.credit_card_number_editText);
         editCVN = (TextInputEditText) findViewById(R.id.cvv_editText);
         editdate = (TextInputEditText) findViewById(R.id.cc_expire_editText);
         editname = (TextInputEditText) findViewById(R.id.name_on_card_editText);
         btnEdit = (Button) findViewById(R.id.add_credit_card_button);
         FirebaseUser user=firebaseAuth.getCurrentUser();
-        btnEdit.setOnClickListener((View.OnClickListener) this);
         textViewEmailName =(TextView)findViewById(R.id.NYCFTA_Email_textView);
         textViewEmailName.setText(user.getEmail());
         firebaseStorage = FirebaseStorage.getInstance();
@@ -64,6 +64,27 @@ public class Profile extends AppCompatActivity {
 
     private void Helper(){
         String cNumber = editcNumber.getText().toString().trim();
+        String Date = editdate.getText().toString().trim();
+        String name = editname.getText().toString().trim();
+        String CVN = editCVN.getText().toString().trim();
+        Helper Helper = new Helper(cNumber,CVN,name,Date);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        databaseReference.child(user.getUid()).setValue(Helper);
+        Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
+    }
+
+    public void onClick(View view){
+        if(view == btnEdit){
+            Helper();
+            sendUserData();
+            finish();
+            startActivity(new Intent(Profile.this, Tickets.class));
+        }
+    }
+
+    private void sendUserData(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
     }
 
     public void onTickets(View view) {

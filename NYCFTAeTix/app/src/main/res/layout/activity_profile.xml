@@ -168,7 +168,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_on_card" />
+        app:layout_constraintTop_toBottomOf="@+id/name_on_card"
+        android:onClick="onClick"/>
 
     <Button
         android:id="@+id/log_out_button"
