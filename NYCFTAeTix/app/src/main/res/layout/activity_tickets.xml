@@ -7,13 +7,36 @@
     android:background="#FBFFFF"
     tools:context=".Tickets">
 
+
+    <Button
+        android:id="@+id/monthly_active_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/unavailable"
+        app:backgroundTint="#83868A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/monthly_textView"
+        app:layout_constraintTop_toBottomOf="@+id/weekly_active_button" />
+
+    <Button
+        android:id="@+id/weekly_active_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/unavailable"
+        app:backgroundTint="#83868A"
+        app:layout_constraintBottom_toTopOf="@+id/monthly_active_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/weekly_textView"
+        app:layout_constraintTop_toBottomOf="@+id/oneWay_active_button" />
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/maps_profile_tickets_button"
-        android:layout_width="234dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -62,24 +85,27 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="2dp"
+        android:contentDescription="@string/ftalogo"
         app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fta_logo" />
 
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/ticket_option_chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
+        android:layout_marginTop="16dp"
         app:chipSpacingHorizontal="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/purchase_tickets_tv">
+        app:layout_constraintTop_toBottomOf="@+id/purchase_tickets_tv"
+        app:selectionRequired="true"
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/one_way_ticket_chip"
@@ -117,34 +143,18 @@
 
     <TextView
         android:id="@+id/purchase_tickets_tv"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="23dp"
         android:background="#004FB1"
         android:gravity="center_horizontal"
         android:text="@string/purchase_tickets_tv"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/active_button" />
-
-
-    <Button
-        android:id="@+id/activate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/activate"
-        android:onClick="ActivateTicket"
-        app:backgroundTint="#83868A"
-        app:layout_constraintBottom_toTopOf="@+id/active_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/one_way_textView"
-        app:layout_constraintTop_toBottomOf="@+id/wallet" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/weekly_textView"
@@ -153,23 +163,22 @@
         android:text="@string/weekly_chip"
         android:textColor="@android:color/tertiary_text_dark"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/active_button"
-        app:layout_constraintEnd_toStartOf="@+id/active_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/weekly_active_button"
+        app:layout_constraintEnd_toStartOf="@+id/weekly_active_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/active_button"
+        android:id="@+id/oneWay_active_button"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/active"
-        android:onClick="ActivateTicket"
+        android:text="@string/unavailable"
         app:backgroundTint="#83868A"
+        app:layout_constraintBottom_toTopOf="@+id/weekly_active_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/weekly_textView"
-        app:layout_constraintTop_toBottomOf="@+id/activate_button" />
+        app:layout_constraintStart_toEndOf="@+id/one_way_textView"
+        app:layout_constraintTop_toBottomOf="@+id/availableTicketsTV" />
 
     <TextView
         android:id="@+id/one_way_textView"
@@ -178,28 +187,45 @@
         android:text="@string/one_way_chip"
         android:textColor="@android:color/tertiary_text_dark"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/activate_button"
-        app:layout_constraintEnd_toStartOf="@+id/activate_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/oneWay_active_button"
+        app:layout_constraintEnd_toStartOf="@+id/oneWay_active_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/wallet"
+    <TextView
+        android:id="@+id/availableTicketsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="@string/wallet"
-        android:textColor="#191717"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:chipIconEnabled="true"
-        app:chipIconTint="#191717"
-        app:chipStrokeColor="#918F8F"
-        app:chipSurfaceColor="#D3CFCF"
+        android:layout_marginTop="20dp"
+        android:text="@string/available_after_purchase_tv"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_profile_tickets_button" />
+        app:layout_constraintTop_toBottomOf="@+id/tickets_algo" />
+
+    <TextView
+        android:id="@+id/monthly_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/monthly_chip"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/monthly_active_button"
+        app:layout_constraintEnd_toStartOf="@+id/monthly_active_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tickets_algo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:text="@string/tickets_tv"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_option_chip" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

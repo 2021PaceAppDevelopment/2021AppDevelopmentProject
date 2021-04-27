@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,15 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
-    private EditText mEmail;
-    private EditText mPassword;
+
     private long counter;
     private Button submitButton;
     private FirebaseAuth mAuth;
-
     private DatabaseReference info;
     private FirebaseDatabase database;
     private static final String TAG = "LoginPage";
+    private TextInputEditText mEmail;
+    private TextInputEditText mPassword;
 
 
     @Override
@@ -43,8 +44,8 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
         mAuth = FirebaseAuth.getInstance();
         submitButton = findViewById(R.id.loginSubmit);
-        mEmail = findViewById(R.id.signUpEmail);
-        mPassword = findViewById(R.id.signUpPassword);
+        mEmail = findViewById(R.id.signUpEmail_editText);
+        mPassword = findViewById(R.id.signUpPassword_editText);
         counter = 0;
 
 

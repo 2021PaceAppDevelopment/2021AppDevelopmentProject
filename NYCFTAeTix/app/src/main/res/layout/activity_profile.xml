@@ -49,11 +49,12 @@
         app:layout_constraintTop_toBottomOf="@+id/credit_card_number">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_on_card_editText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="209dp"
             android:layout_height="49dp"
-            android:textColor="@color/black"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
             android:textColorHint="?android:attr/textColorPrimaryInverseNoDisable"
             app:textInputLayoutFocusedRectEnabled="true"
             tools:layout_editor_absoluteX="-2dp"
@@ -82,8 +83,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="209dp"
             android:layout_height="49dp"
-            android:textColor="@color/black"
             android:inputType="number"
+            android:textColor="@color/black"
             android:textColorHint="?android:attr/textColorPrimaryInverseNoDisable"
             app:textInputLayoutFocusedRectEnabled="true"
             tools:layout_editor_absoluteX="-2dp"
@@ -108,10 +109,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cvv_editText"
-            android:inputType="number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             tools:layout_editor_absoluteX="-2dp"
             tools:layout_editor_absoluteY="113dp" />
 
@@ -174,9 +175,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
+        android:onClick="logOut"
         android:text="@string/log_out_button"
         android:textColor="@android:color/white"
-        android:onClick="logOut"
         app:backgroundTint="#004FB1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -189,6 +190,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fta_logo" />
@@ -203,7 +206,7 @@
         android:text="@string/email"
         android:textColor="#070707"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/NYCFTA_textView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <com.google.android.material.chip.ChipGroup
@@ -211,10 +214,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FBFFFF"
+            android:onClick="onProfile"
+            android:text="@string/profile_button"
+            app:chipBackgroundColor="#D3CFCF"
+            app:chipSurfaceColor="@android:color/darker_gray" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/maps_chip"
@@ -240,21 +253,6 @@
             app:chipBackgroundColor="#D3CFCF"
             app:chipSurfaceColor="@android:color/darker_gray" />
     </com.google.android.material.chip.ChipGroup>
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/profile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#FBFFFF"
-        android:onClick="onProfile"
-        android:text="@string/profile_button"
-        app:chipBackgroundColor="#D3CFCF"
-        app:chipSurfaceColor="@android:color/darker_gray"
-        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
-        app:layout_constraintHorizontal_bias="0.576"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/card_info_textview"
@@ -312,10 +310,10 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/email_TV2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/NYCFTA_textView" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/NYCFTA_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="29dp"

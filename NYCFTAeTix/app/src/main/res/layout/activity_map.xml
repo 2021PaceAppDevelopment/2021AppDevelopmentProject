@@ -48,7 +48,7 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/profile_chip2"
-            android:layout_width="66dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#A5A0A0"
             android:onClick="onProfile"
@@ -94,20 +94,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fta_logo" />
 
-    <!--This is a SearchView for maps. Allowing users to search for their destination
-
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destination_textView" /> -->
 
     <!--Search bar -->
 
