@@ -55,7 +55,7 @@ public class Profile extends AppCompatActivity {
         btnEdit = (Button) findViewById(R.id.add_credit_card_button);
         FirebaseUser user=firebaseAuth.getCurrentUser();
         textViewEmailName =(TextView)findViewById(R.id.NYCFTA_Email_textView);
-        textViewEmailName.setText(user.getEmail());
+        textViewEmailName.setText(user.getEmail()); // use this as templet for setting card number might need an if statment for start
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
@@ -81,7 +81,6 @@ public class Profile extends AppCompatActivity {
             startActivity(new Intent(Profile.this, Tickets.class));
         }
     }
-
     private void sendUserData(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
