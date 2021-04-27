@@ -167,14 +167,11 @@ public class Tickets extends AppCompatActivity {
         weeklyActivateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(buttonCounter == 0){
-                    weeklyActivateButton.setText(getResources().getString(R.string.active));
-                    buttonCounter++;
-                }else if (buttonCounter == 1){
-                    Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
-                    startActivity(TicketPurchased);
-                    buttonCounter = 0;
-                }
+                weeklyActivateButton.setText(getResources().getString(R.string.active));
+                Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
+                startActivity(TicketPurchased);
+                buttonCounter = 0;
+
             }
         });
     }
@@ -183,14 +180,10 @@ public class Tickets extends AppCompatActivity {
         oneWayActivateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(buttonCounter == 0){
-                    oneWayActivateButton.setText(getResources().getString(R.string.active));
-                    buttonCounter++;
-                }else if (buttonCounter == 1){
-                    Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
-                    startActivity(TicketPurchased);
-                    buttonCounter = 0;
-                }
+                oneWayActivateButton.setText(getResources().getString(R.string.active));
+                Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
+                startActivity(TicketPurchased);
+
             }
         });
     }
@@ -198,14 +191,11 @@ public class Tickets extends AppCompatActivity {
         monthlyActivateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(buttonCounter == 0){
-                    monthlyActivateButton.setText(getResources().getString(R.string.active));
-                    buttonCounter++;
-                }else if (buttonCounter == 1){
-                    Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
-                    startActivity(TicketPurchased);
-                    buttonCounter = 0;
-                }
+             monthlyActivateButton.setText(getResources().getString(R.string.active));
+             Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
+             startActivity(TicketPurchased);
+             buttonCounter = 0;
+
             }
         });
     }
