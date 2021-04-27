@@ -57,7 +57,7 @@
         app:srcCompat="@drawable/fta_logo" />
 
     <TextView
-        android:id="@+id/NYCFTA_textView"
+        android:id="@+id/NYCFTA_Email_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

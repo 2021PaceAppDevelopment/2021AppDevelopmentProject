@@ -15,13 +15,14 @@ public class Helper {
     public Helper(){
 
     }
-    public Helper(String email, String cNumber, String CVN, String Month, String Year, String name){
+    public Helper(String email, String cNumber, String CVN, String Month, String Year, String name, String Date){
         this.email = email;
         this.cNumber = cNumber;
         this.CVN = CVN;
         this.Month = Month;
         this.Year = Year;
         this.name = name;
+        this.date = Date;
     }
 
     public String getEmail(){
