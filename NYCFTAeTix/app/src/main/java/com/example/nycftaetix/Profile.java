@@ -28,6 +28,7 @@ public class Profile extends AppCompatActivity {
     private EditText CVN;
     private EditText Month;
     private EditText name;
+    private EditText date;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
@@ -43,7 +44,7 @@ public class Profile extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         cNumber = (EditText)findViewById(R.id.name_on_card);
         CVN = (EditText)findViewById(R.id.cvv_editText);
-        
+        date = (EditText)findViewById(R.id.)
 
     }
 
