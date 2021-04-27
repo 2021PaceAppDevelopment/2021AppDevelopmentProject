@@ -32,11 +32,8 @@
     <string name="login_LoginScreenTitle">LOGIN</string>
     <string name="password_login_Title">PASSWORD:</string>
     <string name="email_Login_Title">EMAIL:</string>
-    <string name="LoginPassword">ENTER PASSWORD</string>
-    <string name="LoginEmail">ENTER EMAIL</string>
     <string name="submit_button_logIn">SUBMIT</string>
     <string name="map_id">73684aebf771a010</string>
-    <string name="wallet">Wallet</string>
     <string name="active">ACTIVE</string>
     <string name="activate">ACTIVATE</string>
     <string name="unavailable">UNAVAILABLE</string>
@@ -47,4 +44,11 @@
     <string name="ftalogo">FTALogo</string>
     <string name="tickets_tv">TICKETS</string>
     <string name="logo">Logo</string>
+    <string name="confirm_password">CONFIRM PASSWORD:</string>
+    <string name="reEnter_password">RE-ENTER PASSWORD</string>
+    <string name="enter_password">ENTER PASSWORD</string>
+    <string name="password">PASSWORD:</string>
+    <string name="enter_email">ENTER EMAIL</string>
+    <string name="emailTextView">EMAIL:</string>
+    <string name="submitButton">SUBMIT</string>
 </resources>

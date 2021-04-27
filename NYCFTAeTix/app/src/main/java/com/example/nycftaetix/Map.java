@@ -52,6 +52,7 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.Duration;
+import com.google.maps.model.TransitLine;
 import com.google.maps.model.TransitMode;
 import com.google.maps.model.TransitRoutingPreference;
 import com.google.maps.model.TravelMode;
@@ -78,18 +79,16 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private FusedLocationProviderClient mFusedLocationClient;
     private final String TAG = "MAP_ACTIVITY";
     private GoogleMap gMap;
-    private SearchView searchView;
     private LatLng latLngOne;
     private  LatLng latLngTwo;
     private GeoApiContext geoApiContext;
     //ArrayList to store PolyLine Information
     private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
-    private AutocompleteSupportFragment autocompleteSupportFragment;
-    private PlacesClient placesClient;
     private Marker mark;
     private String snippetLocation;
     private Marker selectedMarker;
-    private String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
+    private final String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
+
 
 
 
@@ -114,7 +113,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         if(!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), apiKey);
         }
-        placesClient = Places.createClient(this);
+        PlacesClient placesClient = Places.createClient(this);
 
         setAutocompleteSupportFragment();
         // MapView is in a bundle to save current state before being destroyed
@@ -144,7 +143,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     }
     private void setAutocompleteSupportFragment(){
         // initializing autoComplete
-        autocompleteSupportFragment = (AutocompleteSupportFragment)
+        AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autoComplete_fragment);
 
         assert autocompleteSupportFragment != null;
@@ -234,8 +233,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             @Override
             public void onResult(DirectionsResult result) {
                 polyLines(result);
-//                snippetLocation = "Duration: " + result.routes[0].legs[0].duration
-//                        + " Distance: " + result.routes[0].legs[0].distance;
                 mapMarker.setSnippet(snippetLocation);
 
                 Log.d(TAG, "Result routes:" + result.routes[0].toString());

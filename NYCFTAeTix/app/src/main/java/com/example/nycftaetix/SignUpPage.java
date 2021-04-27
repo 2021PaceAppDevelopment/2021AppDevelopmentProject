@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,15 +20,15 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignUpPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = SignUpPage.class.getSimpleName();
-    private EditText email;
-    private EditText password;
+    private TextInputEditText email;
+    private TextInputEditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
         mAuth = FirebaseAuth.getInstance();
-        email = findViewById(R.id.signUpEmail);
-        password = findViewById(R.id.signUpPassword);
+        email = findViewById(R.id.signUpEmail_editText);
+        password = findViewById(R.id.signUpPassword_editText);
 
     }
 
