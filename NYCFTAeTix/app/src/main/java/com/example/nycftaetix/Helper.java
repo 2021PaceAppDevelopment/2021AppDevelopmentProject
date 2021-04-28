@@ -11,6 +11,9 @@ public class Helper {
     public static String Month = "00";
     public static String Year = "00";
     public static String date = "00/00";
+    public static boolean Oneway;
+    public static boolean Weekly;
+    public static boolean Monthly;
 
     public Helper(){
 
@@ -20,6 +23,14 @@ public class Helper {
         this.CVN = CVN;
         this.name = name;
         this.date = Date;
+    }
+
+    public Helper(boolean Oneway, boolean Weekly, boolean Monthly ){
+        // this will be used to call ticket saves
+        this.Oneway = Oneway;
+        this.Weekly = Weekly;
+        this.Monthly = Monthly;
+
     }
 
     public String getEmail(){
