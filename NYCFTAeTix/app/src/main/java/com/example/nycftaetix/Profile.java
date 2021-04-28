@@ -38,6 +38,7 @@ public class Profile extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class Profile extends AppCompatActivity {
         FirebaseUser user=firebaseAuth.getCurrentUser();
         textViewEmailName =(TextView)findViewById(R.id.NYCFTA_Email_textView);
         textViewEmailName.setText(user.getEmail()); // use this as templet for setting card number might need an if statment for start
+
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
@@ -70,6 +72,8 @@ public class Profile extends AppCompatActivity {
         String email = textViewEmailName.getText().toString().trim();
         Helper Helper = new Helper(cNumber,CVN,name,Date,email);
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
         databaseReference.child(user.getUid()).setValue(Helper);
         Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
     }

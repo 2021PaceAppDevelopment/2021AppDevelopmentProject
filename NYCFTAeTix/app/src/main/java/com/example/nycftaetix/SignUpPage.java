@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class SignUpPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -26,6 +28,12 @@ public class SignUpPage extends AppCompatActivity {
     private TextInputEditText password;
     private TextInputEditText Cpassword;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
+    public static boolean Oneway;
+    public boolean Monthly;
+    public boolean Weekly;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,9 @@ public class SignUpPage extends AppCompatActivity {
         email = findViewById(R.id.signUpEmail_editText);
         password = findViewById(R.id.signUpPassword_editText);
         Cpassword = findViewById(R.id.confirmPassword_editText);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
 
     }
 
@@ -60,10 +71,12 @@ public class SignUpPage extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            boolean Oneway = false;
-                            boolean Weekly = false;
-                            boolean Monthly = false;
+                            Oneway = false;
+                            Weekly = false;
+                            Monthly = false;
                             HelperTicket HelperTic = new HelperTicket(Oneway,Weekly,Monthly);
+                            databaseReference.child(user.getUid()).setValue(HelperTic);
+                            Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

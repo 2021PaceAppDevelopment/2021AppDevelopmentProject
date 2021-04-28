@@ -11,6 +11,9 @@ public class Helper {
     public static String Month = "00";
     public static String Year = "00";
     public static String date = "00/00";
+    public static boolean Monthly;
+    public static boolean Weekly;
+    public static boolean Oneway;
 
 
     public Helper(){
@@ -22,6 +25,9 @@ public class Helper {
         this.name = name;
         this.date = Date;
         this.email = email;
+/*        this.Monthly =
+        this.Weekly =
+        this.Oneway = */
     }
 
 
