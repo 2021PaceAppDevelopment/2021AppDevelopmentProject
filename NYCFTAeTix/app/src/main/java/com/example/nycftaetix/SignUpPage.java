@@ -22,6 +22,7 @@ public class SignUpPage extends AppCompatActivity {
     private static final String TAG = SignUpPage.class.getSimpleName();
     private TextInputEditText email;
     private TextInputEditText password;
+    private TextInputEditText Cpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,7 @@ public class SignUpPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.signUpEmail_editText);
         password = findViewById(R.id.signUpPassword_editText);
+        Cpassword = findViewById(R.id.confirmPassword_editText);
 
     }
 
@@ -47,22 +49,26 @@ public class SignUpPage extends AppCompatActivity {
 
     public void SubmitSignUp(View view) {
        // Log.i("SIGN UP PAGE", "This is email: " + email.toString() + ", This is Password: " + password.toString());
+        if(password.getText().toString().equals(Cpassword.getText().toString())) {
+            mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUpPage.this, "This email might not be valid or is already in use, Password may be too short",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    });
+        }else{
+            Toast.makeText(SignUpPage.this, "Passwords do not match " + password.getText().toString() +Cpassword.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(SignUpPage.this, "This email might not be valid or is already in use",
-                                Toast.LENGTH_SHORT).show();
-                        updateUI(null);
-                    }
-                });
+        }
 
     }
 
@@ -73,7 +79,7 @@ public class SignUpPage extends AppCompatActivity {
             startActivity(new Intent(this,Profile.class));
 
         }else {
-            Toast.makeText(this,"U Didnt sign in",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"U Didnt sign up",Toast.LENGTH_LONG).show();
         }
 
     }
