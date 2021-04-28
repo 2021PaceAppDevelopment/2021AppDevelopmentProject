@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -23,6 +25,7 @@ public class SignUpPage extends AppCompatActivity {
     private TextInputEditText email;
     private TextInputEditText password;
     private TextInputEditText Cpassword;
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,10 @@ public class SignUpPage extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            boolean Oneway = false;
+                            boolean Weekly = false;
+                            boolean Monthly = false;
+                            HelperTicket HelperTic = new HelperTicket(Oneway,Weekly,Monthly);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -82,5 +89,10 @@ public class SignUpPage extends AppCompatActivity {
             Toast.makeText(this,"U Didnt sign up",Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    private void sendUserData(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
     }
 }

@@ -67,7 +67,8 @@ public class Profile extends AppCompatActivity {
         String Date = editdate.getText().toString().trim();
         String name = editname.getText().toString().trim();
         String CVN = editCVN.getText().toString().trim();
-        Helper Helper = new Helper(cNumber,CVN,name,Date);
+        String email = textViewEmailName.getText().toString().trim();
+        Helper Helper = new Helper(cNumber,CVN,name,Date,email);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseReference.child(user.getUid()).setValue(Helper);
         Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
