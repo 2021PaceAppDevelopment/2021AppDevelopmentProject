@@ -2,8 +2,10 @@ package com.example.nycftaetix;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,7 +19,8 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         mAuth = FirebaseAuth.getInstance();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        Toolbar mainToolbar =  findViewById(R.id.nycfta_toolbar);
+        setSupportActionBar(mainToolbar);
 
     }
 

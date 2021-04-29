@@ -7,6 +7,20 @@
     android:background="#FBFFFF"
     tools:context=".Tickets">
 
+    <!--Toolbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tickets_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0039A6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Tickets"
+        app:titleTextColor="@color/white" />
+
 
     <TextView
         android:id="@+id/availableTicketsTV2"
@@ -16,24 +30,25 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/ticket_option_chip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/purchase_tickets_tv2" />
 
     <TextView
         android:id="@+id/purchase_tickets_tv2"
-        android:layout_width="393dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#004FB1"
+        android:layout_marginTop="8dp"
+        android:background="#FBFFFF"
         android:gravity="center_horizontal"
         android:text="@string/purchase_tickets_tv"
-        android:textColor="@color/white"
+        android:textColor="#004FB1"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/availableTicketsTV2"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tickets_toolbar" />
 
     <Button
         android:id="@+id/monthly_active_button"
@@ -63,10 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/ftalogo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tickets_toolbar"
         app:srcCompat="@drawable/fta_logo" />
 
     <com.google.android.material.chip.Chip

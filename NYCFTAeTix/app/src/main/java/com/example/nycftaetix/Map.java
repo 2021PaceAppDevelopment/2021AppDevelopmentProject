@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.RouteDiscoveryPreference;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.view.View;
 
 import android.widget.SearchView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -52,6 +54,7 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.Duration;
+import com.google.maps.model.StopDetails;
 import com.google.maps.model.TransitLine;
 import com.google.maps.model.TransitMode;
 import com.google.maps.model.TransitRoutingPreference;
@@ -69,6 +72,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Route;
 
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
@@ -97,6 +102,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        Toolbar mapToolbar =  findViewById(R.id.maps_toolbar);
+        setSupportActionBar(mapToolbar);
+
+
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -124,7 +133,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     }
     @Override
     public void onMapReady(GoogleMap map) {
-       LatLng lng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        LatLng lng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
 
         // Creating pin for map
@@ -147,7 +156,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 getSupportFragmentManager().findFragmentById(R.id.autoComplete_fragment);
 
         assert autocompleteSupportFragment != null;
-       // autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
+        // autocompleteSupportFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
         autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(new LatLng(40.74918831638174, -73.99070172291377),
                 new LatLng(40.74918831638174, -73.99070172291377)));
         autocompleteSupportFragment.setCountries("USA");
@@ -201,7 +210,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-       Task<Location> locationTask = mFusedLocationClient.getLastLocation();
+        Task<Location> locationTask = mFusedLocationClient.getLastLocation();
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
@@ -223,7 +232,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private void retrieveDirections( Marker mapMarker){
         com.google.maps.model.LatLng dest = new  com.google.maps.model.LatLng(
                 mapMarker.getPosition().latitude, mapMarker.getPosition().longitude);
-
         DirectionsApiRequest directionsApiRequest = new DirectionsApiRequest(geoApiContext);
         directionsApiRequest.alternatives(true)
                 .mode(TravelMode.TRANSIT)
@@ -254,56 +262,57 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         Log.d(TAG, "retrieveDirections method " + dest.toString());
     }
 
-/**
- *This method will add polyLines between
- * users location and user searched location
- * @param result
- * */
+    /**
+     *This method will add polyLines between
+     * users location and user searched location
+     * @param result
+     * */
 
     private void polyLines(DirectionsResult result){
-       new Handler(Looper.getMainLooper()).post(new Runnable() {
-           @Override
-           public void run() {
-               //checking for duplicates
-               if (polylineInfos.size() > 0){
-                   for (PolylineInfo polylineInfo : polylineInfos){
-                       //removing the duplicate
-                       polylineInfo.getLine().remove();
-                   }
-                   polylineInfos.clear();
-                   polylineInfos = new ArrayList<>();
-               }
-               for (DirectionsRoute directionsRoute : result.routes){
-                   List<com.google.maps.model.LatLng> path = PolylineEncoding.decode(
-                           directionsRoute.overviewPolyline.getEncodedPath());
-                   List<LatLng> newPath = new ArrayList<>();
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                //checking for duplicates
+                if (polylineInfos.size() > 0){
+                    for (PolylineInfo polylineInfo : polylineInfos){
+                        //removing the duplicate
+                        polylineInfo.getLine().remove();
+                    }
+                    polylineInfos.clear();
+                    polylineInfos = new ArrayList<>();
+                }
+                for (DirectionsRoute directionsRoute : result.routes){
+                    List<com.google.maps.model.LatLng> path = PolylineEncoding.decode(
+                            directionsRoute.overviewPolyline.getEncodedPath());
+                    List<LatLng> newPath = new ArrayList<>();
 
-                   // Retrieving all coordinates to make a polyline
-                   for(com.google.maps.model.LatLng latLng: path){
-                       newPath.add(new LatLng(latLng.lat, latLng.lng));
-                       Log.d(TAG, "run and leg " + latLng.toString());
-                   }
+                    // Retrieving all coordinates to make a polyline
+                    for(com.google.maps.model.LatLng latLng: path){
+                        newPath.add(new LatLng(latLng.lat, latLng.lng));
+                        Log.d(TAG, "run and leg " + latLng.toString());
+                    }
+                    TransitLine transitLine;
 
-                   Log.d(TAG, "run and leg " + directionsRoute.legs[0].toString());
-                   Polyline line = gMap.addPolyline(new PolylineOptions().addAll(newPath));
-                   line.setWidth(15);
-                   line.setColor(Color.GRAY);
-                   line.setGeodesic(true);
-                   line.setClickable(true);
-                   //Getting reference from direction and polyline
-                   polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
-                   onPolylineClick(line);
-               }
-               selectedMarker.setVisible(false);
-           }
-       });
+                    Log.d(TAG, "run and leg " + directionsRoute.legs[0].toString());
+                    Polyline line = gMap.addPolyline(new PolylineOptions().addAll(newPath));
+                    line.setWidth(15);
+                    line.setColor(Color.GRAY);
+                    line.setGeodesic(true);
+                    line.setClickable(true);
+                    //Getting reference from direction and polyline
+                    polylineInfos.add(new PolylineInfo(line, directionsRoute.legs[0]));
+                    onPolylineClick(line);
+                }
+                selectedMarker.setVisible(false);
+            }
+        });
     }
 
 
     /** If the polyline has the same id as the one that was clicked,
-    * that polyline will turn blue, otherwise it will stay gray
-    *
-    **/
+     * that polyline will turn blue, otherwise it will stay gray
+     *
+     **/
 
     public void onPolylineClick(Polyline polyline) {
         for (PolylineInfo info : polylineInfos){
@@ -323,6 +332,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 info.getLine().setColor(Color.GRAY);
                 info.getLine().setZIndex(0);
             }
+
         }
     }
 

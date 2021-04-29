@@ -2,8 +2,10 @@ package com.example.nycftaetix;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,6 +43,10 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toolbar loginToolbar = findViewById(R.id.login_toolbar);
+        setSupportActionBar(loginToolbar);
+
         setContentView(R.layout.activity_login_page);
         mAuth = FirebaseAuth.getInstance();
         submitButton = findViewById(R.id.loginSubmit);
@@ -64,7 +70,6 @@ public class LoginPage extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         info = database.getReference().child("users");
         info.keepSynced(true);
-
         info.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,48 +79,43 @@ public class LoginPage extends AppCompatActivity {
                     counter++;
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "Getting username and email failed", error.toException());
-
             }
         });*/
     }
 
     public void submitLogin(View view) {
-            // [START sign_in_with_email]
-            mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
-                    .addOnCompleteListener(this, task -> {
-                        Log.i("LoginPageInput","This is Email: " +mEmail.getText().toString()+ "This is Password "+mPassword.getText());
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginPage.this, "Wrong Email and/or Password",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    });
-            // [END sign_in_with_email]
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
+                .addOnCompleteListener(this, task -> {
+                    Log.i("LoginPageInput","This is Email: " +mEmail.getText().toString()+ "This is Password "+mPassword.getText());
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(LoginPage.this, "Wrong Email and/or Password",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                    }
+                });
+        // [END sign_in_with_email]
 
 
 
         /*long increment = counter;
         String pwd = mPassword.getText().toString();
         String em = mEmail.getText().toString();
-
         SignIn u = new SignIn(em, pwd);
         info.child(String.valueOf(increment)).setValue(u);
-
         //clearing text after button has been clicked
         mEmail.getText().clear();
         mPassword.getText().clear();
-
         //Once logged in goes to ticket page
         Intent profileIntent = new Intent(this, Tickets.class);
         startActivity(profileIntent);*/

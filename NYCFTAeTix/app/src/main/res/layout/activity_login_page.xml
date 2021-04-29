@@ -7,6 +7,21 @@
     android:background="#FBFFFF"
     tools:context=".LoginPage">
 
+    <!--Toolbar-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0039A6"
+        app:title="Login"
+        app:titleTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUpEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -66,6 +81,7 @@
         android:id="@+id/signUpPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/login_LoginScreenTitle"
         android:textColor="#004FB1"
         android:textSize="36sp"
@@ -74,8 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618" />
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar" />
 
     <TextView
         android:id="@+id/passwordText"
@@ -105,12 +120,15 @@
         android:id="@+id/leftLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="335dp"
+        android:layout_marginRight="335dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
         app:srcCompat="@drawable/fta_logo" />
 
     <Button

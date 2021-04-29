@@ -6,45 +6,33 @@
     android:layout_height="match_parent"
     android:background="#FBFFFF"
     tools:context=".Map">
+    <!--Toolbar-->
 
-    <TextView
-        android:id="@+id/destination_textView"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:background="#004FB1"
-        android:gravity="center_horizontal"
-        android:text="@string/find_best_transit_routes"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/mapView"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/maps_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0039A6"
+        app:title="Maps"
+        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_profile_tickets_button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <!--MapView to show Google Maps-->
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
-
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/maps_toolbar">
+
+        <!--Chips for Map page, profile page, and tickets page-->
 
         <com.google.android.material.chip.Chip
             android:id="@+id/profile_chip2"
@@ -79,43 +67,62 @@
             android:textSize="14sp"
             app:chipBackgroundColor="#D3CFCF"
             app:chipSurfaceColor="#D3CFCF" />
-
     </com.google.android.material.chip.ChipGroup>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:contentDescription="@string/app_logo"
-        app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maps_toolbar"
         app:srcCompat="@drawable/fta_logo" />
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
 
-    <!--Search bar -->
+    <TextView
+        android:id="@+id/destination_textView"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#004FB1"
+        android:gravity="center_horizontal"
+        android:text="@string/find_best_transit_routes"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <!--CardView and fragment for search bar-->
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cardview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destination_textView">
-
         <fragment
             android:id="@+id/autoComplete_fragment"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:background="#070606"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/destination_textView"
-            tools:layout="@layout/activity_map" />
+            app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
+
     </androidx.cardview.widget.CardView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

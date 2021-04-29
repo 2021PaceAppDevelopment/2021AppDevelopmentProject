@@ -3,6 +3,7 @@ package com.example.nycftaetix;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,6 +35,11 @@ public class Tickets extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets);
+
+        Toolbar ticketsToolbar = findViewById(R.id.purchaseTicket_toolbar);
+        setSupportActionBar(ticketsToolbar);
+
+
         ticketChip = findViewById(R.id.tickets_chip);
         oneWayTextView = findViewById(R.id.one_way_textView);
         weeklyTextView = findViewById(R.id.weekly_textView);
@@ -116,7 +123,7 @@ public class Tickets extends AppCompatActivity {
     }
 
     public void onOneWayTickets(View view) {
-       new MaterialAlertDialogBuilder(Tickets.this)
+        new MaterialAlertDialogBuilder(Tickets.this)
                 .setTitle("Purchase Tickets")
                 .setMessage("One way tickets cost $2.75. " +
                         "Would you like to proceed with the purchase?")
@@ -191,10 +198,10 @@ public class Tickets extends AppCompatActivity {
         monthlyActivateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             monthlyActivateButton.setText(getResources().getString(R.string.active));
-             Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
-             startActivity(TicketPurchased);
-             buttonCounter = 0;
+                monthlyActivateButton.setText(getResources().getString(R.string.active));
+                Intent TicketPurchased = new Intent(Tickets.this, TicketPurchase.class);
+                startActivity(TicketPurchased);
+                buttonCounter = 0;
 
             }
         });

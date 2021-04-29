@@ -7,6 +7,19 @@
     android:background="#FBFFFF"
     tools:context=".Profile">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#0039A6"
+        app:title="Profile"
+        app:titleTextColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/NYCFTA_Email_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cc_expiration_textField"
@@ -150,7 +163,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/maps_profile_tickets_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_toolbar"
+        app:layout_constraintVertical_bias="0.189" />
 
     <Button
         android:id="@+id/log_out_button"
@@ -209,18 +223,20 @@
         android:id="@+id/imageView"
         android:layout_width="65dp"
         android:layout_height="66dp"
-        app:layout_constraintBottom_toTopOf="@+id/email_TV"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginRight="43dp"
         app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_toolbar"
         app:srcCompat="@drawable/fta_logo" />
 
     <TextView
         android:id="@+id/email_TV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:text="@string/email"
         android:textColor="#070707"
         android:textSize="15sp"
@@ -233,11 +249,13 @@
         android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/credit_card_number"
         app:layout_constraintEnd_toStartOf="@+id/add_payment"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/profile_toolbar"
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/profile_button"

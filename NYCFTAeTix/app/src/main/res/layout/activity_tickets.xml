@@ -7,6 +7,18 @@
     android:background="#FBFFFF"
     tools:context=".Tickets">
 
+    <!--Toolbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/purchaseTicket_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0039A6"
+        app:title="Tickets"
+        app:titleTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/monthly_active_button"
@@ -36,11 +48,11 @@
         android:id="@+id/maps_profile_tickets_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/purchaseTicket_toolbar">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/profile_chip"
@@ -85,12 +97,12 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/ftalogo"
         app:layout_constraintEnd_toStartOf="@+id/maps_profile_tickets_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/purchaseTicket_toolbar"
         app:srcCompat="@drawable/fta_logo" />
 
 
@@ -146,11 +158,12 @@
         android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
-        android:background="#004FB1"
+        android:background="#FBFFFF"
         android:gravity="center_horizontal"
         android:text="@string/purchase_tickets_tv"
-        android:textColor="@color/white"
+        android:textColor="#004FB1"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
