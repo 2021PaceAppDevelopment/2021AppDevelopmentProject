@@ -19,15 +19,15 @@ public class Helper {
     public Helper(){
 
     }
-    public Helper(String cNumber, String CVN, String name, String Date,String email){
+    public Helper(String cNumber, String CVN, String name, String Date,String email, boolean oneway, boolean weekly, boolean monthly){
         this.cNumber = cNumber;
         this.CVN = CVN;
         this.name = name;
         this.date = Date;
         this.email = email;
-/*        this.Monthly =
-        this.Weekly =
-        this.Oneway = */
+        this.Oneway = oneway;
+        this.Weekly = weekly;
+        this.Monthly = monthly;
     }
 
 
@@ -46,6 +46,16 @@ public class Helper {
     public String getData() {return date;}
 
     public String getName() {return name;}
+
+    public boolean getOneway(){
+        return Oneway;
+    }
+    public boolean getWeekly(){
+        return Weekly;
+    }
+    public boolean getMonthly(){
+        return Monthly;
+    }
 
 
 /*    public static boolean isValidEmail(String email){

@@ -24,9 +24,10 @@ public class HelperTicket {
     public boolean getWeekly(){
         return Weekly;
     }
-    public boolean getMonthly(){
-        return Monthly;
-    }
+    public boolean getMonthly(){ return Monthly;}
+
+
+    
 
 
 }

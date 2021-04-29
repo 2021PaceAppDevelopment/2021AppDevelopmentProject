@@ -1,5 +1,6 @@
 package com.example.nycftaetix;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -15,8 +16,11 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,6 +41,10 @@ public class Profile extends AppCompatActivity {
     private TextInputEditText editdate;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
+    private DatabaseReference myRef;
+    public boolean oneway;
+    public boolean weekly;
+    public boolean monthly;
 
 
     @Override
@@ -71,9 +79,30 @@ public class Profile extends AppCompatActivity {
         String CVN = editCVN.getText().toString().trim();
         String email = textViewEmailName.getText().toString().trim();
 
-        Helper Helper = new Helper(cNumber,CVN,name,Date,email);
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        myRef = databaseReference.child(user.getUid());
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HelperTicket HelperTicket;
+                HelperTicket =(HelperTicket)snapshot.getValue(HelperTicket.class);
+                oneway = HelperTicket.getOneway();
+                weekly = HelperTicket.getWeekly();
+                monthly = HelperTicket.getMonthly();
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("the read failed");
+            }
+        });
+
+        Helper Helper = new Helper(cNumber,CVN,name,Date,email, oneway, weekly, monthly);
+        HelperTicket helpTicket  = new HelperTicket(oneway,weekly,monthly);
 
         databaseReference.child(user.getUid()).setValue(Helper);
         Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
@@ -82,6 +111,7 @@ public class Profile extends AppCompatActivity {
     public void onClick(View view){
         if(view == btnEdit){
             Helper();
+
             sendUserData();
             finish();
             startActivity(new Intent(Profile.this, Tickets.class));
