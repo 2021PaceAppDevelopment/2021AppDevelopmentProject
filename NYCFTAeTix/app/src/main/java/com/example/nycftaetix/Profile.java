@@ -70,6 +70,7 @@ public class Profile extends AppCompatActivity {
         String name = editname.getText().toString().trim();
         String CVN = editCVN.getText().toString().trim();
         String email = textViewEmailName.getText().toString().trim();
+
         Helper Helper = new Helper(cNumber,CVN,name,Date,email);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
