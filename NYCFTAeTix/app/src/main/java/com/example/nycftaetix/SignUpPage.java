@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -75,6 +76,7 @@ public class SignUpPage extends AppCompatActivity {
                             Weekly = false;
                             Monthly = false;
                             HelperTicket HelperTic = new HelperTicket(Oneway,Weekly,Monthly);
+
                             databaseReference.child(user.getUid()).setValue(HelperTic);
                             Toast.makeText(getApplicationContext(),"User Information updated", Toast.LENGTH_LONG).show();
                         } else {
@@ -107,5 +109,10 @@ public class SignUpPage extends AppCompatActivity {
     private void sendUserData(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+    }
+
+
+    public void onDataCatch(DataSnapshot dataSnapshot){
+        String userDetails = dataSnapshot.getValue().toString();;
     }
 }

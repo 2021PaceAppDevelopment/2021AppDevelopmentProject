@@ -89,4 +89,8 @@ PolyLines added to Google Maps. Users are able to search for a location.
 
 Added Login and signup authentication. Login checks for registered users. Signup allows users to enter valid email (not used prior) and password. 
 
+April 28, 2021:
+
+Confirmation password added, Information of profile saving, working on ticket saving feature
+
 </p>
