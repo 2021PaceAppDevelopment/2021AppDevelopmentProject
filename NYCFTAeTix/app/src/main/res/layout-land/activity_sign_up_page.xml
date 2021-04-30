@@ -18,7 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sign Up"
+        app:titleTextColor="@color/white"/>
 
     <Button
         android:id="@+id/loginSubmit"
@@ -69,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="88dp"
         android:layout_marginRight="88dp"
-        android:hint="CONFIRM PASSWORD"
+        android:hint="@string/confirm_password_signUp"
         android:textColorHint="#A19D9D"
         app:endIconDrawable="@drawable/outline_visibility_24"
         app:endIconMode="password_toggle"

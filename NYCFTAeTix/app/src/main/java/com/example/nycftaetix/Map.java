@@ -3,7 +3,6 @@ package com.example.nycftaetix;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,16 +11,12 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.media.RouteDiscoveryPreference;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
-import android.widget.SearchView;
-import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.common.api.Status;
@@ -41,39 +36,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
 import com.google.maps.internal.PolylineEncoding;
-import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
-import com.google.maps.model.Duration;
-import com.google.maps.model.StopDetails;
-import com.google.maps.model.TransitLine;
+import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.TransitMode;
-import com.google.maps.model.TransitRoutingPreference;
 import com.google.maps.model.TravelMode;
 
-import org.xml.sax.XMLReader;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.List;
 
-import okhttp3.Route;
 
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
@@ -90,9 +70,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     //ArrayList to store PolyLine Information
     private ArrayList<PolylineInfo> polylineInfos = new ArrayList<>();
     private Marker mark;
-    private String snippetLocation;
     private Marker selectedMarker;
     private final String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
+    private  String lineName;
 
 
 
@@ -124,6 +104,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         }
         PlacesClient placesClient = Places.createClient(this);
 
+
         setAutocompleteSupportFragment();
         // MapView is in a bundle to save current state before being destroyed
         mapView = findViewById(R.id.mapView);
@@ -148,7 +129,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         //Allows user to decide which route they would like to take
         map.setOnPolylineClickListener(this);
         map.setOnInfoWindowClickListener(this::retrieveDirections);
-
+        map.setMapType(R.string.map_id);
     }
     private void setAutocompleteSupportFragment(){
         // initializing autoComplete
@@ -221,6 +202,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                     Log.d(TAG, "Longitude and latitude coordinates: " + currentLocation.getLongitude() + " " + currentLocation.getLatitude());
                     assert mapView != null;
                     mapView.getMapAsync(Map.this);
+
                 }
             }
 
@@ -241,15 +223,19 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             @Override
             public void onResult(DirectionsResult result) {
                 polyLines(result);
-                mapMarker.setSnippet(snippetLocation);
 
-                Log.d(TAG, "Result routes:" + result.routes[0].toString());
-                Log.d(TAG, "Result routes duration:" + result.routes[0].legs[0].duration);
-                Log.d(TAG, "Result routes distance:" + result.routes[0].legs[0].distance);
-                Log.d(TAG, "Result routes way points:" + result.geocodedWaypoints[0].toString());
+                DirectionsStep directionsStep = new DirectionsStep();
+                //DirectionsStep[] dStep = new DirectionsStep[]();
+              //result.routes[0].legs[0].steps[0].transitDetails.line.name;
+
+
+
+                //Log.d(TAG, "Retrieve directions: Result routes:" + result.routes[0].toString());
+                Log.d(TAG, "Retrieve directions: Result routes duration:" + result.routes[0].legs[0].steps[0].transitDetails.line.name);
+                //Log.d(TAG, "Retrieve directions: Result routes distance:" + result.routes[0].legs[0].distance);
+                //Log.d(TAG, "Retrieve directions: Result routes way points:" + result.geocodedWaypoints[0].toString());
                 //Duration duration = result.routes[0].legs[0].duration;
-//                mapMarker = gMap.addMarker(new MarkerOptions().snippet("Duration: " + result.routes[0].legs[0].distance
-//                        + "Distance: " + result.routes[0].legs[0].distance));
+
 
             }
 
@@ -277,6 +263,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                     for (PolylineInfo polylineInfo : polylineInfos){
                         //removing the duplicate
                         polylineInfo.getLine().remove();
+
                     }
                     polylineInfos.clear();
                     polylineInfos = new ArrayList<>();
@@ -285,15 +272,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                     List<com.google.maps.model.LatLng> path = PolylineEncoding.decode(
                             directionsRoute.overviewPolyline.getEncodedPath());
                     List<LatLng> newPath = new ArrayList<>();
-
+                    //retrieving line name of bus
+                    lineName = directionsRoute.legs[0].steps[0].transitDetails.line.name;
                     // Retrieving all coordinates to make a polyline
                     for(com.google.maps.model.LatLng latLng: path){
                         newPath.add(new LatLng(latLng.lat, latLng.lng));
                         Log.d(TAG, "run and leg " + latLng.toString());
                     }
-                    TransitLine transitLine;
 
-                    Log.d(TAG, "run and leg " + directionsRoute.legs[0].toString());
+                    Log.d(TAG, "run and leg " +  directionsRoute.legs[0].toString());
                     Polyline line = gMap.addPolyline(new PolylineOptions().addAll(newPath));
                     line.setWidth(15);
                     line.setColor(Color.GRAY);
@@ -322,10 +309,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 LatLng endLocation = new LatLng(info.getLeg().endLocation.lat, info.getLeg().endLocation.lng);
                 Marker gMapMarker = gMap.addMarker(new MarkerOptions()
                         .position(endLocation).title(info.getLeg().endAddress)
-                        .snippet("Duration: " + info.getLeg().duration + " Distance: "
+                        .snippet(" Duration: " + info.getLeg().duration + " Distance: "
                                 + info.getLeg().distance));
-                //+ "\n Departure Time: " + info.getLeg().departureTime
-                //                                + " Arrival time: " + info.getLeg().arrivalTime
+                Log.d("onPolylineClick", "lineName: " + lineName);
                 gMapMarker.showInfoWindow();
 
             }else{

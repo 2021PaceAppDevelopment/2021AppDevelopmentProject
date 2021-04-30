@@ -1,6 +1,7 @@
 package com.example.nycftaetix;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -29,8 +30,6 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Toolbar signUpToolbar =  findViewById(R.id.signup_toolbar);
         setSupportActionBar(signUpToolbar);
-
-
 
 
         setContentView(R.layout.activity_sign_up_page);

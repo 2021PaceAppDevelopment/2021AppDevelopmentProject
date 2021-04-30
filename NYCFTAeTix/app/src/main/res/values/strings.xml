@@ -51,4 +51,5 @@
     <string name="enter_email">ENTER EMAIL</string>
     <string name="emailTextView">EMAIL:</string>
     <string name="submitButton">SUBMIT</string>
+    <string name="confirm_password_signUp">CONFIRM PASSWORD</string>
 </resources>
