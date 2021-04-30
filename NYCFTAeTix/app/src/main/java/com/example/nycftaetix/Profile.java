@@ -71,7 +71,7 @@ public class Profile extends AppCompatActivity {
         btnEdit = (Button) findViewById(R.id.add_credit_card_button);
         FirebaseUser user=firebaseAuth.getCurrentUser();
         textViewEmailName =(TextView)findViewById(R.id.NYCFTA_Email_textView);
-        //textViewEmailName.setText(user.getEmail()); // use this as template for setting card number might need an if statment for start
+        textViewEmailName.setText(user.getEmail()); // use this as template for setting card number might need an if statment for start
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();

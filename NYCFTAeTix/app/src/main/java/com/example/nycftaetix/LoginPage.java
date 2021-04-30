@@ -1,42 +1,29 @@
 package com.example.nycftaetix;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity {
 
+    private static final String TAG = "LoginPage";
     private long counter;
     private Button submitButton;
     private FirebaseAuth mAuth;
     private DatabaseReference info;
     private FirebaseDatabase database;
-    private static final String TAG = "LoginPage";
     private TextInputEditText mEmail;
     private TextInputEditText mPassword;
 
@@ -47,7 +34,6 @@ public class LoginPage extends AppCompatActivity {
 
         Toolbar loginToolbar = findViewById(R.id.login_toolbar);
         setSupportActionBar(loginToolbar);
-
 
 
         setContentView(R.layout.activity_login_page);
@@ -93,7 +79,7 @@ public class LoginPage extends AppCompatActivity {
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
                 .addOnCompleteListener(this, task -> {
-                    Log.i("LoginPageInput","This is Email: " +mEmail.getText().toString()+ "This is Password "+mPassword.getText());
+                    Log.i("LoginPageInput", "This is Email: " + mEmail.getText().toString() + "This is Password " + mPassword.getText());
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
@@ -126,12 +112,12 @@ public class LoginPage extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser user) {
-        if(user != null){
-            Toast.makeText(this,"You Signed in!",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,Profile.class));
+        if (user != null) {
+            Toast.makeText(this, "You Signed in!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, Profile.class));
 
-        }else {
-            Toast.makeText(this,"Your Sign in has failed",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Your Sign in has failed", Toast.LENGTH_LONG).show();
         }
 
     }

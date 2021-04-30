@@ -72,7 +72,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private Marker mark;
     private Marker selectedMarker;
     private final String apiKey = "AIzaSyDWnEiYtshg-hHBlUcPR8S4aae6BTKoc3k";
-    private  String lineName;
 
 
 
@@ -272,8 +271,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                     List<com.google.maps.model.LatLng> path = PolylineEncoding.decode(
                             directionsRoute.overviewPolyline.getEncodedPath());
                     List<LatLng> newPath = new ArrayList<>();
-                    //retrieving line name of bus
-                    lineName = directionsRoute.legs[0].steps[0].transitDetails.line.name;
                     // Retrieving all coordinates to make a polyline
                     for(com.google.maps.model.LatLng latLng: path){
                         newPath.add(new LatLng(latLng.lat, latLng.lng));
@@ -311,7 +308,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                         .position(endLocation).title(info.getLeg().endAddress)
                         .snippet(" Duration: " + info.getLeg().duration + " Distance: "
                                 + info.getLeg().distance));
-                Log.d("onPolylineClick", "lineName: " + lineName);
                 gMapMarker.showInfoWindow();
 
             }else{

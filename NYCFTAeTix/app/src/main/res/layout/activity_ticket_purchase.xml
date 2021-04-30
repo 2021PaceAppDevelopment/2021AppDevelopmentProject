@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     android:background="#FBFFFF"
     tools:context=".TicketPurchase">
+    <!--Toolbar-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ticketPurchase_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#0039A6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Ticket"
+        app:titleTextColor="@color/white" />
 
     <ImageView
         android:id="@+id/leftLogo"
-        android:layout_width="53dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketPurchase_toolbar"
         app:srcCompat="@drawable/fta_logo_1" />
 
     <TextView

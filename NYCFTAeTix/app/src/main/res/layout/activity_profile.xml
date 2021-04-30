@@ -165,7 +165,7 @@
         android:background="#FBFFFF"
         android:gravity="center|center_horizontal|center_vertical"
         android:text="@string/payment_method"
-        android:textColor="#004FB1"
+        android:textColor="#0E0E0E"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

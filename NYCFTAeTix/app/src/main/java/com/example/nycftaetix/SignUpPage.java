@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class SignUpPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = SignUpPage.class.getSimpleName();
@@ -55,7 +57,7 @@ public class SignUpPage extends AppCompatActivity {
     public void SubmitSignUp(View view) {
         // Log.i("SIGN UP PAGE", "This is email: " + email.toString() + ", This is Password: " + password.toString());
 
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+        mAuth.createUserWithEmailAndPassword(Objects.requireNonNull(email.getText()).toString(), Objects.requireNonNull(password.getText()).toString())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
@@ -76,11 +78,11 @@ public class SignUpPage extends AppCompatActivity {
     public void updateUI(FirebaseUser account){
 
         if(account != null){
-            Toast.makeText(this,"U Signed Up successfully",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"You signed up successfully",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,Profile.class));
 
         }else {
-            Toast.makeText(this,"U Didnt sign in",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Sign up was unsuccessful. Please check email/password. Password must be a minimum of 6 characters.",Toast.LENGTH_LONG).show();
         }
 
     }

@@ -1,25 +1,24 @@
 package com.example.nycftaetix;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         mAuth = FirebaseAuth.getInstance();
-        Toolbar mainToolbar =  findViewById(R.id.nycfta_toolbar);
+        Toolbar mainToolbar = findViewById(R.id.nycfta_toolbar);
         setSupportActionBar(mainToolbar);
 
     }
@@ -30,8 +29,8 @@ public class MainPage extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            startActivity(new Intent(this,Profile.class));
+        if (currentUser != null) {
+            startActivity(new Intent(this, Profile.class));
         }
     }
 

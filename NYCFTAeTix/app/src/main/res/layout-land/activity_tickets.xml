@@ -17,8 +17,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:title="Tickets"
+        app:title="Purchase Tickets"
         app:titleTextColor="@color/white" />
 
 
@@ -42,7 +41,7 @@
         android:background="#FBFFFF"
         android:gravity="center_horizontal"
         android:text="@string/purchase_tickets_tv"
-        android:textColor="#004FB1"
+        android:textColor="#0C0D0E"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
