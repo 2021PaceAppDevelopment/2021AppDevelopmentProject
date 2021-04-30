@@ -210,7 +210,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_toolbar"
-        app:srcCompat="@drawable/fta_logo" />
+        app:srcCompat="@drawable/fta_logo_1" />
 
     <TextView
         android:id="@+id/email_TV"

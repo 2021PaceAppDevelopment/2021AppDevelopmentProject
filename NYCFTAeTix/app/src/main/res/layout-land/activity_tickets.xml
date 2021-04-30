@@ -81,7 +81,7 @@
         android:contentDescription="@string/ftalogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tickets_toolbar"
-        app:srcCompat="@drawable/fta_logo" />
+        app:srcCompat="@drawable/fta_logo_1" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/profile_chip"

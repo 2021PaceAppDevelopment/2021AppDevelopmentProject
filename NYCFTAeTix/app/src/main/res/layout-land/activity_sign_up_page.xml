@@ -156,6 +156,6 @@
         app:layout_constraintBottom_toTopOf="@+id/signUpEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_toolbar"
-        app:srcCompat="@drawable/fta_logo" />
+        app:srcCompat="@drawable/fta_logo_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fta_logo" />
+        app:srcCompat="@drawable/fta_logo_1" />
 
     <TextView
         android:id="@+id/textView2"
