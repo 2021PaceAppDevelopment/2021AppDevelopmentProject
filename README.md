@@ -68,7 +68,7 @@ Technologies: <br>
  Firebase <br>
  QR CODE Package<br>
 <br>
- Video Demo Link: [a link] https://www.youtube.com/watch?v=rSCeq2HMVrI&t=2s
+ Video Demo Link:https://www.youtube.com/watch?v=rSCeq2HMVrI&t=2s
  <br>
 
 <br>
