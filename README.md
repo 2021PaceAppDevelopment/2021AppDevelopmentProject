@@ -99,4 +99,6 @@ Confirmation password added, Information of profile saving, working on ticket sa
 May 1, 2021:
 Presetnation and Video uploaded
 
+Note: Parts of the Map.java code was written by CodingWithMitch: https://goo.gl/pfGNnw
+
 </p>
